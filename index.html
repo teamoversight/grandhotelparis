@@ -1,0 +1,2442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Hôtel de Paris × Oversight</title>
+<meta name="description" content="Proposition d’accompagnement Oversight pour le Grand Hôtel de Paris, 72 boulevard de Strasbourg, Paris 10e.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* =========================================================================
+   CHARTE OVERSIGHT
+   Blue Flash #496BFF · Blue Dark #00011E · Kaki #7C9182
+   ========================================================================= */
+:root{
+  --dark:#00011E; --dark-2:#0B1338; --flash:#496BFF; --flash-soft:#8FA6FF;
+  --kaki:#7C9182; --blue-light:#EDF3FF; --grey-light:#F2F1EE; --kaki-light:#E3EAE5;
+  --paper:#FFFFFF; --grad-a:#BFD7FF; --grad-b:#F5EDDC;
+  --ink:#23263A; --muted:#5A6076; --line:#E5E3DC;
+  --pos:#5F8A6E; --neg:#B5533F;
+  --radius:14px; --shadow:0 8px 30px rgba(0,1,30,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);
+  background:var(--grey-light);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--dark);margin:0 0 .5em}
+h1 em,h2 em,h3 em{font-style:italic;color:var(--flash);font-weight:600}
+p{margin:0 0 1em;color:var(--ink)}
+a{color:inherit}
+img{max-width:100%;display:block}
+hr.sep{border:none;border-top:1px solid var(--line);margin:26px 0}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:64px 0;scroll-margin-top:104px}
+.pagemark{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.grain{position:relative}
+.grain::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- EN-TÊTE FIXE + NAVIGATION ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,1,30,.96);
+  backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;align-items:center;
+  justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-family:'Playfair Display',serif;
+  font-size:17px;letter-spacing:.01em;text-decoration:none}
+.nav-toggle{display:flex;flex-direction:column;justify-content:center;gap:4px;width:38px;height:34px;
+  background:none;border:0;cursor:pointer;padding:0}
+.nav-toggle span{display:block;height:2px;background:#fff;border-radius:2px;transition:.2s}
+nav.menu{position:absolute;top:60px;left:0;right:0;background:rgba(0,1,30,.985);
+  padding:10px 20px 18px;transform:translateY(-135%);transition:transform .28s;
+  max-height:78vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,1,30,.3)}
+nav.menu.open{transform:translateY(0)}
+nav.menu .mgrid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0}
+nav.menu a{display:block;color:rgba(255,255,255,.78);text-decoration:none;font-size:14px;
+  padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.07);border-radius:6px}
+nav.menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+nav.menu a.on{background:var(--flash);color:#fff}
+nav.menu a .mnum{display:inline-block;min-width:26px;color:var(--flash-soft);font-size:12px;font-weight:700}
+nav.menu a.on .mnum{color:#fff}
+@media(min-width:760px){nav.menu .mgrid{grid-template-columns:1fr 1fr;column-gap:22px}}
+@media(min-width:1060px){nav.menu .mgrid{grid-template-columns:1fr 1fr 1fr}}
+
+.sticky-theme{position:fixed;top:60px;left:0;right:0;z-index:900;background:var(--grey-light);
+  border-bottom:1px solid var(--line);box-shadow:0 4px 12px rgba(0,1,30,.06);
+  transform:translateY(-120%);transition:transform .25s}
+.sticky-theme.visible{transform:translateY(0)}
+.sticky-theme .container{padding:10px 20px}
+.sticky-theme span{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--flash);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(min-width:900px){.sticky-theme span{font-size:13px}}
+
+/* ---------- PAGE DE GARDE ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden;padding:0}
+.hero.brandgrad{background:linear-gradient(135deg,var(--grad-a) 0%,var(--grad-b) 100%);color:var(--dark)}
+.hero.brandgrad h1{color:var(--dark)}
+.hero.brandgrad .sub{color:#33364d}
+.hero-content{position:relative;z-index:2;padding:96px 20px 84px;max-width:1120px;margin:0 auto;width:100%}
+.hero h1{color:var(--dark);font-size:clamp(38px,7vw,68px);line-height:1.02;margin-bottom:6px}
+.hero .sub{font-size:clamp(16px,2.4vw,21px);font-family:'Playfair Display',serif;font-style:italic;
+  color:var(--flash);margin-bottom:28px}
+.hero .list-clean li{font-size:14.5px;margin-bottom:7px}
+.hero .list-clean li.h{font-weight:700;color:var(--dark);margin-top:18px;font-size:15.5px}
+.hero .list-clean li.note{color:#3c4056;font-style:italic;list-style:none;padding-left:0;margin-top:8px}
+.hero .list-clean li.note::before{display:none}
+.scroll-cue{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(0,1,30,.45);
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:flex;flex-direction:column;
+  align-items:center;gap:6px;z-index:2}
+.scroll-cue .line{width:1px;height:24px;background:rgba(0,1,30,.35)}
+
+/* ---------- TITRAILLE ---------- */
+.section-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--flash);
+  font-weight:700;margin-bottom:10px}
+.section-title{font-size:clamp(23px,3.6vw,34px);margin-bottom:8px;line-height:1.15}
+.section-sub{color:var(--muted);font-size:16px;margin-bottom:30px}
+.section-sub.tight{margin-bottom:18px}
+h3.blk{font-size:19px;margin:34px 0 12px}
+h3.blk:first-child{margin-top:0}
+h4.sub{font-family:'Inter';font-size:13px;text-transform:uppercase;letter-spacing:.07em;
+  font-weight:700;color:var(--flash);margin-bottom:10px}
+h4.mini{font-size:16px;margin:0 0 10px}
+.tag{display:inline-block;background:var(--dark);color:#fff;font-family:'Inter';font-size:11.5px;
+  font-weight:700;letter-spacing:.1em;padding:3px 9px;border-radius:4px;vertical-align:2px}
+
+/* ---------- FONDS ---------- */
+.bg-alt{background:var(--paper)}
+.bg-soft{background:var(--blue-light)}
+.bg-kaki{background:var(--kaki-light)}
+.bg-grad{background:linear-gradient(135deg,var(--grad-a) 0%,var(--grad-b) 100%)}
+.divider-section{background:var(--dark);color:#fff;padding:84px 0;text-align:center;position:relative;overflow:hidden}
+.divider-section h2{color:#fff;font-size:clamp(24px,4vw,38px);margin-bottom:14px}
+.divider-section h2 em{color:var(--flash-soft)}
+.divider-section p{color:rgba(255,255,255,.68);max-width:760px;margin:0 auto;font-size:16px}
+
+/* ---------- GRILLES ---------- */
+.grid-2{display:grid;grid-template-columns:1fr;gap:30px}
+.grid-2.align-center{align-items:center}
+@media(min-width:860px){.grid-2{grid-template-columns:1fr 1fr;gap:40px}}
+.grid-2.wide-left{grid-template-columns:1fr}
+@media(min-width:860px){.grid-2.wide-left{grid-template-columns:1.45fr 1fr}}
+.grid-2.wide-right{grid-template-columns:1fr}
+@media(min-width:860px){.grid-2.wide-right{grid-template-columns:1fr 1.45fr}}
+.grid-3{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:700px){.grid-3{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+.grid-4{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.grid-4{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+.grid-5{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(min-width:900px){.grid-5{grid-template-columns:repeat(5,1fr)}}
+
+/* ---------- LISTES ---------- */
+.list-clean{list-style:none;margin:0;padding:0}
+.list-clean li{position:relative;padding-left:19px;margin-bottom:10px;font-size:15px;color:var(--ink)}
+.list-clean li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;
+  background:var(--flash);border-radius:50%}
+.list-clean.tight li{margin-bottom:6px;font-size:14.5px}
+.list-clean li.l1{padding-left:38px;font-size:14.5px;color:var(--muted)}
+.list-clean li.l1::before{left:19px;width:5px;height:5px;background:var(--kaki)}
+.list-clean li.l2{padding-left:56px;font-size:14px;color:var(--muted)}
+.list-clean li.l2::before{left:38px;width:4px;height:4px;background:var(--kaki)}
+.list-clean li.kaki::before{background:var(--kaki)}
+
+/* ---------- CARTES ---------- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow)}
+.card.flat{box-shadow:none}
+.bg-alt .card{background:#FBFBF9}
+.card>*:last-child{margin-bottom:0}
+.keylearning{border-left:3px solid var(--flash);background:var(--blue-light);border-radius:0 var(--radius) var(--radius) 0;
+  padding:18px 22px;margin-bottom:30px}
+.keylearning p{margin:0;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--dark);line-height:1.45}
+.icon-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.bg-alt .icon-card{background:#FBFBF9}
+.icon-card img{width:34px;height:34px;margin-bottom:12px;opacity:.9}
+.icon-card h4{font-size:16px;margin-bottom:10px}
+.icon-card p{font-size:13.5px;color:var(--muted);margin:0}
+
+/* ---------- CHIFFRES CLÉS ---------- */
+.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:6px 0 18px}
+.stat-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 14px;text-align:left}
+.bg-alt .stat-card{background:#FBFBF9}
+.stat-card .num{font-family:'Playfair Display',serif;font-size:26px;color:var(--dark);font-weight:700;line-height:1}
+.stat-card .label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--flash);
+  margin-top:6px;font-weight:700}
+
+/* ---------- FORCES / FAIBLESSES ---------- */
+.fw-fw{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
+@media(min-width:700px){.fw-fw{grid-template-columns:1fr 1fr}}
+.fw-box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px}
+.bg-alt .fw-box{background:#FBFBF9}
+.fw-box h4{font-family:'Inter';font-size:13px;text-transform:uppercase;letter-spacing:.07em;
+  font-weight:700;margin-bottom:12px}
+.fw-box .list-clean li{margin-bottom:6px;font-size:14.5px}
+.fw-box .list-clean li:last-child{margin-bottom:0}
+.fw-box.forces h4{color:var(--pos)}
+.fw-box.forces .list-clean li::before{background:var(--pos)}
+.fw-box.faiblesses h4{color:var(--neg)}
+.fw-box.faiblesses .list-clean li::before{background:var(--neg)}
+
+/* ---------- TABLEAUX ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:13.5px}
+table th,table td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+table thead th{background:var(--dark);color:#fff;font-weight:600;font-size:12px;text-transform:uppercase;
+  letter-spacing:.03em;white-space:normal;vertical-align:bottom}
+table tbody tr:last-child td{border-bottom:none}
+table tbody tr:nth-child(2n){background:#FAFAF8}
+.sumrow td{background:var(--blue-light)!important;font-weight:700!important}
+.boldrow td{font-weight:700!important}
+.num-right td:not(:first-child),.num-right th:not(:first-child){text-align:right}
+.mid td:not(:first-child),.mid th:not(:first-child){text-align:center}
+.fit{min-width:0;width:100%;table-layout:fixed;font-size:12px}
+.fit th,.fit td{white-space:normal;padding:7px 8px}
+.compact{font-size:12.5px;min-width:420px}
+.var-pos{color:var(--pos);font-weight:700}
+.var-neg{color:var(--neg);font-weight:700}
+.check{color:var(--kaki);font-weight:700;text-align:center}
+.stars{color:#B99A55;letter-spacing:1px}
+table td.k{font-weight:600;color:var(--dark)}
+.rate-table table{min-width:0;font-size:13px}
+.rate-table td:first-child{width:34px;padding-right:0}
+.rate-table td:first-child img{width:18px;height:18px;object-fit:contain}
+.rate-table td:last-child{text-align:right;font-weight:700;color:var(--dark)}
+
+/* ---------- GRAPHIQUES ---------- */
+.chart-box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 14px 12px}
+.bg-alt .chart-box{background:#FBFBF9}
+.chart-box h4{font-size:14px;text-align:center;color:var(--dark);margin-bottom:14px;line-height:1.3}
+.chart-canvas-wrap{position:relative;height:300px}
+.chart-canvas-wrap.tall{height:380px}
+.chart-canvas-wrap.short{height:250px}
+.small-note{font-size:12px;color:var(--muted);margin-top:10px}
+.small-note.center{text-align:center}
+
+/* ---------- IMAGES ---------- */
+.photo-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:700px){.photo-grid{grid-template-columns:1fr 1fr}}
+.photo-grid img{border-radius:10px;width:100%;border:1px solid var(--line)}
+.photo-grid.one{grid-template-columns:1fr}
+.photo-grid.one img{max-height:76vh;object-fit:contain;margin:0 auto;width:auto}
+.figure{margin:0}
+.figure img{border-radius:10px;border:1px solid var(--line);background:var(--paper);width:100%}
+.figure figcaption{font-size:12px;color:var(--muted);margin-top:8px}
+.img-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:8px}
+.img-scroll img{border:0}
+.map{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.map img{width:100%}
+
+/* ---------- PIED DE PAGE ---------- */
+footer{background:var(--dark);color:rgba(255,255,255,.5);font-size:12.5px;padding:26px 0}
+footer .container{display:flex;flex-direction:column;gap:6px}
+
+/* =========================================================================
+   IMPRESSION / EXPORT PDF — 1 slide du PPT = 1 page
+   ========================================================================= */
+@media print{
+  @page{size:A4 landscape;margin:9mm}
+  html,body{background:#fff!important}
+  *{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important;box-shadow:none!important}
+  header,nav.menu,.nav-toggle,.sticky-theme,.scroll-cue,[data-chrome]{display:none!important}
+  .container{max-width:100%!important;padding:0!important}
+  section{break-before:page;break-inside:avoid;padding:0!important;scroll-margin-top:0}
+  section:first-of-type,section#s01{break-before:auto}
+  .hero{min-height:auto!important;height:auto!important;align-items:flex-start}
+  .hero-content{padding:0!important}
+  .hero h1{font-size:30px!important}
+  .hero .sub{font-size:15px!important;margin-bottom:10px!important}
+  .hero .list-clean li{font-size:9.6px!important;margin-bottom:2px!important}
+  .hero .list-clean li.h{font-size:10.4px!important;margin-top:6px!important}
+  .grid-2,.grid-3,.grid-4,.grid-5,.icon-row,.fw-fw,.stats-row,.photo-grid{display:grid!important}
+  .grid-2{grid-template-columns:1.45fr 1fr!important;gap:6mm!important}
+  .grid-2.even{grid-template-columns:1fr 1fr!important}
+  .grid-3{grid-template-columns:repeat(3,1fr)!important;gap:4mm!important}
+  .grid-4{grid-template-columns:repeat(4,1fr)!important;gap:3mm!important}
+  .grid-5{grid-template-columns:repeat(5,1fr)!important;gap:3mm!important}
+  .stats-row{grid-template-columns:repeat(4,1fr)!important;gap:2mm!important}
+  .fw-fw{grid-template-columns:1fr 1fr!important;gap:4mm!important}
+  .photo-grid{grid-template-columns:1fr 1fr!important;gap:3mm!important}
+  .photo-grid.one{grid-template-columns:1fr!important}
+  .card,.icon-card,.fw-box,.chart-box,.figure,.stat-card,img,tr,.keylearning{break-inside:avoid}
+  .card,.icon-card,.fw-box,.chart-box{padding:3mm 4mm!important;border-radius:2mm!important}
+  .keylearning{padding:2.5mm 4mm!important;margin-bottom:4mm!important}
+  .keylearning p{font-size:11px!important}
+  .table-wrap{overflow:visible!important;border-radius:0}
+  table{min-width:0!important;width:100%!important;font-size:8.4px!important;table-layout:fixed}
+  table th,table td{padding:1.6px 3px!important;white-space:normal!important;word-break:break-word}
+  table thead th{font-size:8.2px!important;letter-spacing:0!important}
+  #s06 table thead th,#s07 table thead th,#s08 table thead th{font-size:7.2px!important}
+  thead{display:table-header-group}
+  h1,h2,h3,h4{break-after:avoid}
+  h3.blk{margin:3mm 0 2mm!important;font-size:13px!important}
+  h4.mini{font-size:11.5px!important}
+  h4.sub{font-size:9px!important}
+  .section-title{font-size:19px!important;line-height:1.1!important;margin-bottom:2mm!important}
+  .section-sub{margin-bottom:3mm!important;font-size:11px!important}
+  .section-label{font-size:8.5px!important;margin-bottom:1.5mm!important}
+  p{font-size:9.6px!important;margin-bottom:1.8mm!important;line-height:1.35!important}
+  .list-clean li{font-size:9.6px!important;margin-bottom:1.4mm!important;padding-left:3.6mm!important;line-height:1.35!important}
+  .list-clean li::before{top:1.2mm!important;width:1.1mm!important;height:1.1mm!important}
+  .list-clean li.l1,.list-clean li.l2{font-size:9.2px!important;padding-left:6mm!important}
+  .list-clean li.l1::before{left:3mm!important}
+  .list-clean li.l2::before{left:3mm!important}
+  .stat-card .num{font-size:15px!important}
+  .stat-card .label{font-size:7.5px!important}
+  .chart-canvas-wrap{height:62mm!important;max-height:62mm}
+  .chart-canvas-wrap.tall{height:74mm!important}
+  .chart-canvas-wrap.short{height:52mm!important}
+  .chart-canvas-wrap canvas{max-width:100%!important;height:auto!important}
+  .chart-box h4{font-size:9.5px!important;margin-bottom:2mm!important}
+  .photo-grid img{max-height:64mm;object-fit:contain}
+  .photo-grid.one img{max-height:150mm}
+  .map{border:0!important;border-radius:0!important;background:none!important}
+  .map img{max-height:78mm;width:auto!important;max-width:100%!important;margin:0 auto!important}
+  .figure img{max-height:120mm;object-fit:contain}
+  .img-scroll{overflow:visible!important;padding:0!important;border:0!important}
+  .small-note{font-size:8px!important;margin-top:1.5mm!important}
+  .divider-section{padding:60mm 0!important}
+  footer{display:none!important}
+  /* --- densite : 1 slide = 1 page, sans jamais couper de texte --- */
+  #s05 .map img{max-height:64mm!important}
+  #s05 .list-clean li{font-size:8.2px!important;margin-bottom:.7mm!important}
+  #s05 hr.sep{margin:2.5mm 0!important}
+  #s05 h4.mini{font-size:9.5px!important;margin-bottom:1mm!important}
+  #s06 .map img{max-height:80mm!important}
+  #s06 table{font-size:7.4px!important}
+  #s06 .list-clean li{font-size:7.6px!important;margin-bottom:.5mm!important}
+  #s06 p{font-size:8.4px!important}
+  #s06 h3.blk{font-size:11px!important;margin:0 0 1.5mm!important}
+  #s06 h4.mini{font-size:9px!important;margin-bottom:1mm!important}
+  #s06 .card{padding:2mm 3mm!important}
+  #s08 .map img{max-height:66mm!important}
+  #s08 .card img{max-height:8mm!important;margin-bottom:2mm!important}
+  #s08 .list-clean li{font-size:8px!important;margin-bottom:.6mm!important}
+  #s08 table{font-size:7.6px!important}
+  #s08 .rate-table td:first-child img{width:2.6mm!important;height:2.6mm!important}
+  #s18 .chart-canvas-wrap.short{height:auto!important}
+  #s18 .chart-canvas-wrap canvas{max-height:34mm!important;width:auto!important;margin:0 auto}
+  #s18 p{font-size:8.2px!important;margin-bottom:1mm!important}
+  #s18 .chart-box h4{font-size:8px!important;margin-bottom:.8mm!important}
+  #s18 .chart-box{padding:1.5mm 2mm!important}
+  #s18 .grid-2{gap:3mm!important}
+  #s22 .img-scroll img{max-height:26mm!important;object-fit:contain}
+  #s22 .chart-canvas-wrap.short{height:42mm!important}
+  #s22 p{font-size:8.4px!important}
+  #s07 table{font-size:7.4px!important}
+  #s07 .list-clean li{font-size:8.4px!important}
+  .print-break{break-before:page!important}
+}
+/* Forces / Faiblesses / Recommandations — composant natif Oversight */
+.ffr{display:grid;grid-template-columns:1fr;gap:16px;margin-top:10px}
+@media(min-width:880px){.ffr{grid-template-columns:repeat(3,1fr)}}
+.ffr-col{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px;box-shadow:var(--shadow)}
+.bg-alt .ffr-col{background:#FBFBF9}
+.ffr-col>h4{font-family:'Inter';font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin:0 0 14px;padding-bottom:9px;border-bottom:2px solid}
+.ffr-col.forces>h4{color:var(--pos);border-color:var(--pos)}
+.ffr-col.faiblesses>h4{color:var(--neg);border-color:var(--neg)}
+.ffr-col.reco>h4{color:var(--flash);border-color:var(--flash)}
+.ffr-sub{font-family:'Inter';font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--kaki);margin:16px 0 7px}
+.ffr-col > .ffr-sub:first-of-type{margin-top:0}
+.ffr-col ul,.ffr-col ol{margin:0;padding-left:17px}
+.ffr-col li{margin-bottom:7px;font-size:13px;color:var(--ink);line-height:1.46}
+.ffr-col li::marker{color:var(--kaki)}
+.ffr-col ul{list-style:disc}
+.ffr-col ul ul{margin-top:6px}
+.ffr-mini{margin:12px 0 4px}
+.ffr-mini table{min-width:0;font-size:12.5px}
+.ffr-mini td:not(:first-child),.ffr-mini th:not(:first-child){text-align:right}
+@media print{
+  .ffr{grid-template-columns:repeat(3,1fr)!important;gap:4mm!important}
+  .ffr-col{padding:3mm 3.5mm!important;border-radius:2mm!important;break-inside:avoid}
+  .ffr-col>h4{font-size:8.4px!important;margin-bottom:2mm!important;padding-bottom:1mm!important}
+  .ffr-sub{font-size:7.6px!important;margin:2mm 0 1mm!important}
+  .ffr-col li{font-size:8px!important;margin-bottom:1mm!important;line-height:1.32!important}
+  .ffr-col ul,.ffr-col ol{padding-left:3.4mm!important}
+  .ffr-mini table{font-size:7.6px!important}
+}
+.cap-table,.cf-table{font-size:11.5px;min-width:820px}
+table th.hl,table td.hl{background:var(--blue-light)!important;font-weight:700;color:var(--dark)}
+.cap-table td:first-child,.cf-table td:first-child{white-space:nowrap}
+.cf-table th .yr,.yr{display:block;font-weight:400;font-size:9.5px;color:var(--muted);text-transform:none;letter-spacing:0;margin-top:2px}
+.cf-table th{white-space:nowrap}
+.pl-table{min-width:760px}
+.pl-table td:nth-child(2),.pl-table td:nth-child(4){text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pl-table td:nth-child(3){color:var(--muted);white-space:nowrap}
+.pl-table td.cmt{white-space:normal;color:var(--muted);font-size:12px;min-width:240px;line-height:1.4}
+.mid-c{text-align:center}
+@media print{
+  .cap-table,.cf-table{font-size:6.6px!important;min-width:0!important}
+  .pl-table{min-width:0!important;font-size:7.6px!important}
+  .pl-table td.cmt{font-size:6.8px!important;min-width:0!important}
+  .cf-table th .yr,.yr{font-size:6px!important}
+}
+/* Hero cover + CTA */
+.hero-cover{display:flex;flex-direction:column;justify-content:center;gap:8px}
+.hero .eyebrow{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--flash);font-weight:700;margin-bottom:18px}
+.hero .cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:34px;
+  background:var(--dark);color:#fff;text-decoration:none;font-weight:600;font-size:16px;
+  padding:15px 28px;border-radius:40px;transition:transform .15s,box-shadow .15s;box-shadow:0 10px 26px rgba(0,1,30,.22)}
+.hero .cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,1,30,.28)}
+.hero .cta .arw{transition:transform .15s}
+.hero .cta:hover .arw{transform:translateX(4px)}
+/* Vision blocks */
+.vision-block{margin-top:38px;padding-top:32px;border-top:1px solid var(--line)}
+.vision-block:first-of-type{margin-top:14px;padding-top:0;border-top:0}
+.vision-q{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;
+  font-size:clamp(21px,2.9vw,31px);line-height:1.2;color:var(--dark);margin:0 0 16px;position:relative;padding-left:22px}
+.vision-q::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:4px;background:var(--flash);border-radius:2px}
+.vision-lead{background:var(--blue-light);border-radius:var(--radius);padding:22px 24px}
+.vision-lead p:last-child,.vision-lead ul:last-child{margin-bottom:0}
+.model-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.bg-alt .model-card{background:#FBFBF9}
+.model-card strong{display:block;font-family:'Playfair Display',serif;font-size:18px;color:var(--dark);margin-bottom:8px;font-weight:600}
+.model-card .out{display:block;margin-top:10px;color:var(--flash);font-weight:600;font-size:14px}
+/* Numbered legend (localisation) */
+.numlist{list-style:none;margin:0;padding:0;counter-reset:nl}
+.numlist li{counter-increment:nl;position:relative;padding-left:30px;margin-bottom:9px;font-size:14.5px;color:var(--ink)}
+.numlist li::before{content:counter(nl);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;
+  background:var(--dark);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+.numlist.flash li::before{background:var(--flash)}
+.numlist.kaki li::before{background:var(--kaki)}
+/* 6-item menu */
+nav.menu .mgrid{grid-template-columns:1fr!important;max-width:560px;margin:0 auto}
+nav.menu a{font-family:'Playfair Display',serif;font-size:17px;padding:13px 14px}
+@media print{.hero .cta{display:none!important}.vision-lead{background:none!important;padding:0!important}}
+/* legend pin colours = map colours */
+.numlist.pin-corp li::before{background:#78849C}
+.numlist.pin-leisure li::before{background:#0C0C30}
+.numlist.pin-oversight li::before{background:#35CD97}
+/* map framing */
+.map.contain{background:#FBFBF9;padding:10px}
+.map.contain img{width:100%;height:auto;object-fit:contain;max-height:78vh;margin:0 auto}
+/* country mini charts (low-res source: cap width to stay crisp) */
+.country-chart{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px;margin:4px 0 12px;text-align:center}
+.bg-alt .country-chart{background:#FBFBF9}
+.country-chart img{max-width:238px;width:100%;height:auto;margin:0 auto;image-rendering:auto}
+@media print{.country-chart img{max-width:52mm}}
+.keylearning{margin-top:6px}
+.keylearning p{text-transform:none!important;font-size:15px!important}
+.section-title + .keylearning{margin-top:10px}
+.vision-q + .keylearning{margin:8px 0 14px}
+/* le baton bleu reste reserve aux titres de la vision */
+.vision-block .keylearning{border-left-width:3px}
+/* ===== Responsive mobile : aucun débordement horizontal ===== */
+.grid-2>*,.grid-3>*,.grid-4>*,.grid-5>*,.myov-stack>*,.fw-fw>*{min-width:0}
+.table-wrap{max-width:100%}
+.img-scroll{max-width:100%;overflow-x:auto}
+@media(max-width:760px){
+  nav.menu .mgrid{max-width:100%}
+  .stats-row{grid-template-columns:repeat(2,1fr)!important}
+  .cap-table,.cf-table{font-size:11px}
+  .cap-table th,.cap-table td,.cf-table th,.cf-table td{padding:5px 6px}
+  #scta .cta-final-inner{padding:56px 4px}
+  #s05 .loc-transport{gap:8px}
+}
+.imgzoomable{cursor:zoom-in}
+.imgzoom-overlay{position:fixed;inset:0;background:rgba(0,1,30,.9);display:flex;align-items:center;justify-content:center;z-index:99999;cursor:zoom-out;padding:24px}
+.imgzoom-overlay img{max-width:96vw;max-height:94vh;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.imgzoom-hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font:600 12px/1 'Inter',sans-serif;letter-spacing:.04em;opacity:.72}
+@media print{.imgzoom-overlay{display:none!important}.imgzoomable{cursor:auto}}
+#backTop{position:fixed;right:22px;bottom:22px;z-index:9998;width:48px;height:48px;border:0;border-radius:50%;
+  background:var(--dark,#00011E);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 22px rgba(0,1,30,.28);opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .2s,transform .2s,box-shadow .15s}
+#backTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+#backTop:hover{box-shadow:0 12px 28px rgba(0,1,30,.36)}
+#backTop svg{width:20px;height:20px}
+@media(max-width:760px){#backTop{right:16px;bottom:16px;width:44px;height:44px}}
+@media print{#backTop{display:none!important}}
+</style>
+<style id="ghc-styles">
+/* ===== Concept V2 — planche d'intention encapsulée (.ghc) ===== */
+.ghc{--bg:#FBF7F0; --panel:#F5EFE4; --ink:#15192C; --brown:#6E431F; --muted:#5B5650; --gold:#C49A55; --line:#E3D6BF;
+  --serif:"Playfair Display", "Didot", Georgia, serif; --sans:"Work Sans", "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box; }
+.ghc *,.ghc *::before,.ghc *::after{box-sizing:inherit}
+.ghc{margin:0;background:var(--bg);color:var(--muted);font-family:var(--sans);font-weight:300;line-height:1.6}
+.ghc img{max-width:100%;display:block;object-fit:cover;width:100%;height:100%}
+.ghc .slide{max-width:1440px;margin:0 auto;padding:clamp(20px,3vw,40px);position:relative}
+.ghc h1,.ghc h2,.ghc h3{font-family:var(--serif);font-weight:400;margin:0;color:var(--ink);letter-spacing:-.01em}
+.ghc h1{font-size:clamp(2.6rem,5.6vw,5rem);line-height:.98}
+.ghc h1 .sub{display:block!important;color:var(--brown)}
+.ghc .rule{display:inline-block;width:clamp(60px,12vw,190px);height:1px;background:var(--brown);vertical-align:middle;margin-left:22px}
+.ghc .s1{display:grid;grid-template-columns:1.25fr .48fr 1fr;gap:12px;align-items:stretch}
+.ghc .s1 .big{border-radius:0 260px 0 0;overflow:hidden;min-height:600px}
+.ghc .s1 .stack{display:grid;grid-template-rows:1.2fr 1fr;gap:10px;padding-top:120px}
+.ghc .s1 .stack figure{margin:0;overflow:hidden}
+.ghc .s1 .stack figure:first-child{border-radius:0 90px 0 0}
+.ghc .s1 .text{padding:10px 0 0 clamp(10px,2vw,30px)}
+.ghc .items{margin-top:44px;display:grid;gap:34px}
+.ghc .item{display:grid;grid-template-columns:52px 1fr;gap:20px;align-items:start}
+.ghc .item svg{width:48px;height:60px;fill:none;stroke:var(--gold);stroke-width:1.4}
+.ghc .item div{border-left:1px solid var(--line);padding-left:16px}
+.ghc .item h3{font-size:1.55rem;margin-bottom:6px}
+.ghc .item p{margin:0;font-size:.98rem}
+.ghc .s2{display:grid;grid-template-columns:1fr .55fr .85fr;gap:14px;align-items:start}
+.ghc .s2 .lead{max-width:520px;margin:18px 0 28px;font-size:1rem}
+.ghc .s2 .lead::before{content:"";display:block;width:56px;height:1px;background:var(--gold);margin-bottom:18px}
+.ghc .label{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.ghc .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:26px}
+.ghc .chip{aspect-ratio:1.35;border-radius:10px}
+.ghc .cap{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-top:8px;color:var(--muted)}
+.ghc .mats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ghc .mats figure{margin:0}
+.ghc .mats img{aspect-ratio:1.2;height:auto;border-radius:4px}
+.ghc .s2 .tall{border-radius:150px 0 0 0;overflow:hidden;height:600px}
+.ghc .s2 .duo{display:grid;grid-template-rows:295px 295px;gap:10px}
+.ghc .s2 .duo figure{margin:0;overflow:hidden}
+.ghc .s3{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+.ghc .s3 .main{border-radius:0 220px 0 70px;overflow:hidden;min-height:560px}
+.ghc .s3 h1 .sub{font-size:.55em;line-height:1.15;margin-top:12px}
+.ghc .s3 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.ghc .s3 .grid figure{margin:0}
+.ghc .s3 .grid figure.wide{grid-column:1/-1}
+.ghc .s3 .grid .ph{overflow:hidden;aspect-ratio:1.06}
+.ghc .s3 .grid .wide .ph{aspect-ratio:2.35;border-radius:0 60px 0 0}
+.ghc figcaption{font-size:.8rem;letter-spacing:.12em;margin-top:8px;color:var(--muted)}
+.ghc figcaption::after{content:"";display:block;width:34px;height:1px;background:var(--gold);margin-top:6px}
+.ghc .tagline{font-family:var(--serif);font-style:italic;color:var(--brown);font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.45;margin:18px 0 0}
+.ghc .interlude{max-width:1440px;margin:0 auto;padding:clamp(40px,6vw,80px) 24px;text-align:center}
+.ghc .interlude p{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.3;margin:0}
+.ghc .interlude p::before,.ghc .interlude p::after{content:"";display:block;width:64px;height:1px;background:var(--gold);margin:0 auto}
+.ghc .interlude p::before{margin-bottom:26px}
+.ghc .interlude p::after{margin-top:26px}
+.ghc .note{max-width:1440px;margin:0 auto;padding:0 clamp(20px,3vw,40px) 34px;font-size:.78rem;font-style:italic}
+@media (max-width:1000px){.ghc .s1,.ghc .s2,.ghc .s3{grid-template-columns:1fr}
+.ghc .s1 .stack{padding-top:0;grid-template-columns:1fr 1fr;grid-template-rows:auto}
+.ghc .s1 .big,.ghc .s3 .main{min-height:380px}
+.ghc .s2 .tall{height:420px}
+.ghc .s2 .duo{grid-template-rows:260px}
+.ghc .s1 .text{order:-1}
+.ghc .s3 .text{order:-1}
+.ghc .s2 .duo{grid-template-columns:1fr 1fr;grid-template-rows:auto}}
+@media (max-width:560px){.ghc .swatches,.ghc .mats{grid-template-columns:repeat(2,1fr)}}
+</style>
+<style id="myov-styles">
+
+/* ===== MyOversight : demonstration animee (DA carte : filets fins, gris clair, bleu flash) ===== */
+/* proportions d'un ecran d'ordinateur portable (~16:10) */
+.myov-demo{position:relative;margin:18px auto 0;max-width:880px;--cyc:40s}
+/* chassis d'ordinateur portable */
+.mvlap{position:relative}
+.mvlap-screen{background:#14152C;border-radius:14px 14px 5px 5px;padding:13px 13px 15px;position:relative}
+.mvlap-screen::before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#3A3C57}
+.mvlap-base{position:relative;left:50%;transform:translateX(-50%);width:116%;height:13px;
+  background:linear-gradient(180deg,#D9DAE0,#B9BCC6);clip-path:polygon(1.6% 0,98.4% 0,100% 100%,0 100%);border-radius:0 0 7px 7px}
+.mvlap-base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:13%;height:5px;
+  background:#C4C7D0;border-radius:0 0 6px 6px}
+.mvw{border-radius:7px;overflow:hidden;background:var(--paper)}
+/* chrome de navigateur */
+.mvw-tabs{display:flex;align-items:flex-end;gap:6px;padding:7px 10px 0;background:#E7E5DF}
+.mvtab{font-size:11.5px;color:var(--dark);background:var(--grey-light);border:1px solid var(--line);border-bottom:0;
+  border-radius:7px 7px 0 0;padding:6px 16px 7px}
+.mvplus{font-size:14px;color:#A9A69E;padding:0 6px 6px}
+.mvw-bar .nv{font-size:13px;color:#A9A69E;width:17px;text-align:center}
+.mvw-bar .nv.dim{opacity:.45}
+.mvw-url svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.8;margin-right:6px;vertical-align:-1px}
+.mvw-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--grey-light);border-bottom:1px solid var(--line)}
+.mvw-url{display:flex;align-items:center;margin-left:6px;padding:5px 14px;flex:1;
+  font-size:11.5px;letter-spacing:.02em;color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:20px}
+.mvw-body{display:grid;grid-template-columns:186px 1fr;min-height:436px}
+.mvw-rail{border-right:1px solid var(--line);background:#FBFBF9;padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+.mvw-rail .rk{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:0 10px 8px}
+.rl{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;font-size:13px;color:var(--muted);
+  animation:mvRail var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5))}
+.rl i{width:7px;height:7px;border-radius:2px;background:#D7D4CC;flex:0 0 7px;
+  animation:mvRailDot var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5))}
+@keyframes mvRail{0%,1%{background:none;color:var(--muted)}3%,19%{background:var(--blue-light);color:var(--dark);font-weight:600}
+  21%,100%{background:none;color:var(--muted)}}
+@keyframes mvRailDot{0%,1%{background:#D7D4CC}3%,19%{background:var(--flash)}21%,100%{background:#D7D4CC}}
+.mvw-main{position:relative;padding:18px 20px}
+.mvs{position:absolute;inset:18px 20px;margin:0;padding:0;border:0;background:none;display:flex;flex-direction:column;justify-content:center;opacity:0;animation:mvScene var(--cyc) linear infinite both;
+  animation-delay:calc(var(--i) * (var(--cyc) / 5))}
+@keyframes mvScene{0%,2%{opacity:0;transform:translateY(7px)}4%,18%{opacity:1;transform:none}20%,100%{opacity:0;transform:translateY(-5px)}}
+.mvs h5{margin:0 0 3px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--flash)}
+.mvs .mvsub{display:block;margin-bottom:13px;font-size:12.5px;color:var(--muted)}
+@keyframes mvPop{0%,3%{opacity:0;transform:translateY(7px)}6%,18%{opacity:1;transform:none}20%,100%{opacity:0}}
+/* alertes */
+.mvalert{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border:1px solid var(--line);border-left:3px solid #B4563C;
+  border-radius:10px;background:var(--paper);margin-bottom:9px}
+.mvalert.ok{border-left-color:var(--kaki)}
+.mvalert .ic{flex:0 0 26px;width:26px;height:26px;border-radius:8px;background:#F6EDEA;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:#B4563C}
+.mvalert.ok .ic{background:var(--kaki-light);color:var(--kaki)}
+.mvalert strong{display:block;font-size:13.5px;color:var(--dark);line-height:1.3}
+.mvalert span{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
+.mvalert .tag{margin-left:auto;flex:0 0 auto;align-self:center;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 8px;border-radius:20px;background:#F6EDEA;color:#B4563C}
+.mvalert.ok .tag{background:var(--kaki-light);color:var(--kaki)}
+/* reporting */
+.mvkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:14px}
+.mvkpi{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--paper)}
+.mvkpi b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:25px;color:var(--dark);line-height:1}
+.mvkpi span{display:block;margin-top:4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mvkpi em{font-style:normal;font-size:12px;font-weight:600;color:var(--kaki)}
+.mvchart{display:flex;align-items:flex-end;gap:9px;height:104px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#FBFBF9}
+.mvchart i{flex:1;background:var(--flash);opacity:.85;border-radius:3px 3px 0 0;transform:scaleY(0);transform-origin:bottom;
+  height:var(--h);animation:mvBar var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5) + var(--o,0s))}
+.mvchart i.last{background:var(--kaki);opacity:1}
+@keyframes mvBar{0%,4%{transform:scaleY(0)}11%,18%{transform:scaleY(1)}20%,100%{transform:scaleY(0)}}
+/* ticket */
+.mvticket{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:var(--paper)}
+.mvticket .th{display:flex;align-items:center;gap:10px}
+.mvticket .th strong{font-size:14px;color:var(--dark)}
+.mvchip{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:20px;
+  animation:mvChip var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5))}
+@keyframes mvChip{0%,7%{background:#F6EDEA;color:#B4563C}8%,12%{background:var(--blue-light);color:var(--flash)}
+  13%,100%{background:var(--kaki-light);color:var(--kaki)}}
+.mvsteps{list-style:none;margin:13px 0 0;padding:0}
+.mvsteps li{display:flex;gap:11px;align-items:flex-start;padding:7px 0;font-size:13px;color:var(--dark);
+  animation:mvPop var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5) + var(--o,0s))}
+.mvsteps li u{text-decoration:none;flex:0 0 46px;font-size:11.5px;color:var(--muted);padding-top:1px}
+.mvsteps li s{text-decoration:none;flex:0 0 9px;width:9px;height:9px;margin-top:4px;border-radius:50%;background:var(--flash)}
+.mvsteps li.done s{background:var(--kaki)}
+/* e-reputation */
+.mvrep{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center}
+.mvscore{border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;background:#FBFBF9}
+.mvscore b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:38px;line-height:1;color:var(--dark)}
+.mvscore span{display:block;margin-top:5px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mvgauge{margin-top:10px;height:5px;border-radius:3px;background:#E9E7E0;overflow:hidden}
+.mvgauge i{display:block;height:100%;width:87%;background:var(--kaki);transform:scaleX(0);transform-origin:left;
+  animation:mvGauge var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5))}
+@keyframes mvGauge{0%,5%{transform:scaleX(0)}12%,18%{transform:scaleX(1)}20%,100%{transform:scaleX(0)}}
+.mvrev{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--paper);margin-bottom:9px}
+.mvrev strong{display:block;font-size:13px;color:var(--dark)}
+.mvrev span{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
+/* vue proprietaire */
+.mvown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:13px}
+.mvown div{border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:var(--paper)}
+.mvown b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:var(--dark);line-height:1}
+.mvown span{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.mvflow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:#FBFBF9}
+.mvflow em{font-style:normal;font-size:11.5px;color:var(--muted);padding:4px 9px;border:1px solid var(--line);border-radius:20px;background:var(--paper)}
+.mvflow b{font-size:12px;color:var(--dark);padding:5px 11px;border-radius:20px;background:var(--blue-light);color:var(--flash)}
+.mvflow .ar{color:#C9C6BE;font-size:13px}
+/* curseur + bulles */
+.mvcur{position:absolute;left:12%;top:26%;width:19px;height:19px;pointer-events:none;z-index:4;
+  animation:mvCur var(--cyc) linear infinite both;filter:drop-shadow(0 1px 2px rgba(0,1,30,.25))}
+.mvcur svg{width:100%;height:100%;display:block;fill:var(--dark);stroke:#fff;stroke-width:1.2}
+@keyframes mvCur{
+  0%,6%{left:4.6%;top:27.9%}
+  14%,18%{left:45.7%;top:48.7%}
+  20%,26%{left:4.6%;top:35.0%}
+  34%,38%{left:31.2%;top:45.6%}
+  40%,46%{left:4.6%;top:42.0%}
+  54%,58%{left:46.4%;top:61.2%}
+  60%,66%{left:4.6%;top:49.1%}
+  74%,78%{left:58.9%;top:48.5%}
+  80%,86%{left:4.6%;top:56.1%}
+  94%,98%{left:45.7%;top:67.6%}
+  100%{left:4.6%;top:27.9%}}
+.mvbubs{position:relative;height:52px;margin-top:22px}
+.mvbub{position:absolute;left:0;top:0;right:0;padding:12px 16px;border-radius:12px;
+  background:var(--dark);color:#fff;font-size:13.5px;line-height:1.4;z-index:5;
+  animation:mvPop var(--cyc) linear infinite both;animation-delay:calc(var(--i) * (var(--cyc) / 5) + 1.2s)}
+.mvbub::before{content:"";position:absolute;left:28px;top:-6px;width:12px;height:12px;background:var(--dark);transform:rotate(45deg)}
+.mvbub b{color:#9FB4FF;font-weight:600}
+.mvpause{position:absolute;right:12px;top:-34px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  background:none;border:1px solid var(--line);border-radius:20px;padding:5px 12px;cursor:pointer}
+.mvpause:hover{color:var(--dark);border-color:var(--muted)}
+.myov-demo.paused *{animation-play-state:paused!important}
+@media(max-width:900px){
+  .mvw-body{grid-template-columns:1fr}
+  .mvw-rail{display:none}
+  .mvbubs{height:auto}
+  .mvbub{position:static;margin-top:10px}
+}
+@media print,(prefers-reduced-motion:reduce){
+  .myov-demo *{animation:none!important}
+  .mvs{position:relative;inset:auto;opacity:1!important;transform:none!important;margin-bottom:16px;page-break-inside:avoid}
+  .mvs .pop,.mvsteps li{opacity:1!important;transform:none!important}
+  .mvchart i,.mvgauge i{transform:none!important}
+  .mvcur,.mvpause,.mvlap-base{display:none}
+  .mvlap-screen{background:none;padding:0}
+  .mvlap-screen::before{display:none}
+  .mvw{border:1px solid var(--line)}
+  .mvbubs{height:auto}
+  .mvbub{position:relative;margin:8px 0 0;opacity:1!important}
+  .mvbub::before{display:none}
+  .mvw-body{min-height:0}
+  .rl{background:none}
+}
+
+</style>
+<style id="ghp-styles">
+/* =========================================================================
+   GRAND HÔTEL DE PARIS — compléments au gabarit Carnot
+   ========================================================================= */
+/* en-tête : menu déroulant en haut à gauche */
+.nav-inner{justify-content:flex-start;gap:14px}
+.nav-toggle{order:-1}
+.brand .bx{opacity:.75;font-size:15px;font-family:'Inter',sans-serif;font-weight:300}
+.brand .oslogo{height:19px;width:auto;display:block}
+.brand .osfallback{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em;color:#fff}
+nav.menu{left:0;right:auto;width:min(420px,100vw);border-radius:0 0 14px 0;padding:10px 14px 16px}
+nav.menu .mgrid{grid-template-columns:1fr!important;max-width:none}
+nav.menu a{font-family:'Playfair Display',serif;font-size:17px;padding:12px 12px}
+nav.menu a .mnum{font-family:'Inter',sans-serif}
+@media(max-width:760px){nav.menu{width:100vw;border-radius:0}}
+
+/* keylearnings : encart bleu, Inter (comme Carnot phase 5) */
+.keylearning p{font-family:'Inter',-apple-system,sans-serif!important;font-style:normal!important;
+  font-size:15px!important;line-height:1.5!important;color:var(--dark)!important;font-weight:500}
+.keylearning p+p{margin-top:8px}
+.keylearning.closing{background:var(--dark);border-left-color:var(--flash)}
+.keylearning.closing p{color:#fff!important;font-size:17px!important;text-align:center}
+.vision-lead{background:none;border-radius:0;padding:0}
+.vision-q{text-wrap:balance}
+.lead-strong{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:16px}
+td.wrap,th.wrap{white-space:normal!important}
+table td.hl,table th.hl{background:var(--blue-light)!important;font-weight:700;color:var(--dark)}
+.stats-row.three{grid-template-columns:repeat(3,1fr)}
+.stats-row.two{grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.stats-row{grid-template-columns:repeat(4,1fr)}.stats-row.three{grid-template-columns:repeat(3,1fr)}.stats-row.two{grid-template-columns:repeat(2,1fr)}}
+.stat-card .label{text-transform:none;letter-spacing:.02em;font-size:13px}
+.grid-2>*,.grid-3>*,.grid-4>*,.fw-fw>*,.ffr>*{min-width:0}
+
+/* cartes avec repères numérotés */
+.overlay-map{position:relative;background:var(--paper)}
+.overlay-map>img{width:100%;height:auto;display:block}
+.pin{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font:700 11px/1 'Inter',sans-serif;color:#fff;
+  box-shadow:0 1px 4px rgba(0,1,30,.3);border:1.5px solid #fff;z-index:2}
+.pin.static{position:static;transform:none;display:inline-flex;margin-bottom:10px}
+.pin-flash{background:var(--flash)}
+.pin-dark{background:var(--dark)}
+.pin-kaki{background:var(--kaki)}
+.pin-grey{background:#D6DDE5;color:#12123D}
+.contain-map .pin{width:20px;height:20px;font-size:10px}
+.maplabel{position:absolute;font:600 12px/1.2 'Inter',sans-serif;color:var(--dark);background:rgba(255,255,255,.92);
+  padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,1,30,.12);white-space:nowrap;z-index:1;
+  display:inline-flex;align-items:center;gap:6px}
+.maplabel.ghp{color:#1600F5;font-weight:700}
+.maplabel.station img{width:14px;height:14px}
+@media(max-width:700px){.pin{width:17px;height:17px;font-size:9px}.maplabel{font-size:9.5px;padding:3px 5px}.maplabel.station img{width:10px;height:10px}}
+.numlist.pin-list-dark li::before{background:var(--dark)}
+.numlist.grey li::before{background:#D6DDE5;color:#12123D}
+
+/* slide 6 : fiches hôtels */
+#s06 .overlay-map{max-width:880px;margin-left:auto;margin-right:auto}
+.hotel-card .hotel-logo{height:52px;width:auto;max-width:100%;object-fit:contain;margin:0 0 14px}
+.kv{list-style:none;margin:0 0 14px;padding:0;font-size:13.5px}
+.kv li{padding:5px 0;border-bottom:1px solid var(--line);color:var(--ink)}
+.kv li:last-child{border-bottom:0}
+.rate-table table{min-width:0}
+
+/* slide 7 : légende transport */
+.loc-legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin:0 0 14px}
+.loc-ghp{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#1600F5;font-size:14.5px}
+.pin-ghp{width:14px;height:14px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#EA4335;display:inline-block}
+.loc-lines{display:inline-flex;align-items:center;gap:6px}
+.loc-lines img{width:24px;height:24px;object-fit:contain}
+.mline{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;
+  font:800 12px/1 'Inter',sans-serif;color:#fff}
+.mline.dark{color:#1a1a1a}
+
+/* slide 15 : galerie photos */
+.gallery{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--dark);box-shadow:var(--shadow)}
+.gallery-track{display:flex;transition:transform .45s ease;will-change:transform}
+.gslide{flex:0 0 100%;margin:0;aspect-ratio:3/2;background:#0b0c22}
+.gslide img{width:100%;height:100%;object-fit:cover}
+.gnav{position:absolute;top:calc(50% - 40px);transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.9);color:var(--dark);font-size:26px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,1,30,.25);z-index:2}
+.gnav.prev{left:12px}.gnav.next{right:12px}
+.gnav:hover{background:#fff}
+.gdots{position:absolute;left:0;right:0;bottom:84px;display:flex;justify-content:center;gap:7px;z-index:2}
+.gdots button{width:8px;height:8px;border-radius:50%;border:0;background:rgba(255,255,255,.5);padding:0;cursor:pointer}
+.gdots button.on{background:#fff;width:22px;border-radius:5px}
+.gthumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:8px;background:var(--dark)}
+.gthumbs button{padding:0;border:2px solid transparent;border-radius:6px;overflow:hidden;cursor:pointer;background:none;aspect-ratio:3/2;opacity:.6}
+.gthumbs button.on{border-color:var(--flash);opacity:1}
+.gthumbs img{width:100%;height:100%;object-fit:cover}
+
+/* slide 38 : flux MyOversight */
+.flow3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin-top:20px}
+.flow-step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.flow-step strong{display:block;font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);margin-bottom:6px}
+.flow-step span{font-size:13.5px;color:var(--muted)}
+.flow-arrow{display:flex;align-items:center;color:var(--flash);font-size:24px;font-weight:700}
+@media(max-width:820px){.flow3{grid-template-columns:1fr}.flow-arrow{justify-content:center;transform:rotate(90deg)}}
+.myov-demo{margin-top:56px!important}
+
+/* slide 40 : frise chronologique */
+.timeline{margin-top:6px}
+.tl-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tl-track::before{content:"";position:absolute;left:12.5%;right:12.5%;top:22px;height:2px;background:linear-gradient(90deg,var(--flash),var(--kaki))}
+.tl-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:0 4px 14px;font:inherit;color:var(--muted)}
+.tl-dot{width:46px;height:46px;border-radius:50%;background:var(--paper);border:2px solid var(--flash);color:var(--flash);
+  display:flex;align-items:center;justify-content:center;font:700 16px/1 'Inter',sans-serif;transition:.2s}
+.tl-name{font-family:'Playfair Display',serif;font-size:19px;color:var(--dark);font-weight:600}
+.tl-step:hover .tl-dot{transform:scale(1.06)}
+.tl-step.on .tl-dot{background:var(--flash);color:#fff;box-shadow:0 0 0 6px rgba(73,107,255,.16)}
+.tl-step.on .tl-name{color:var(--flash)}
+.tl-step.on::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);border:9px solid transparent;border-bottom-color:var(--paper);border-top:0}
+.tl-panels{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px}
+.bg-alt .tl-panels{background:#FBFBF9}
+.tl-panel{display:none}
+.tl-panel.on{display:block;animation:tlIn .25s ease}
+@keyframes tlIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tl-print-title{display:none}
+.tl-lead{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(18px,2.2vw,22px);color:var(--dark);line-height:1.35;margin-bottom:16px}
+.tl-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.tl-items li{background:var(--blue-light);border-radius:10px;padding:12px 14px;font-size:14.5px;color:var(--dark);font-weight:500}
+.tl-items li.wide{grid-column:1/-1}
+@media(max-width:640px){.tl-track{grid-template-columns:repeat(2,1fr);row-gap:6px}.tl-track::before{display:none}.tl-name{font-size:16px}.tl-step.on::after{display:none}}
+.guarantee{margin:26px auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 12px;
+  background:var(--dark);color:#fff;border-radius:var(--radius);padding:20px 24px;text-align:center}
+.g-label{font-family:'Playfair Display',serif;font-size:20px}
+.g-pill{background:var(--flash);color:#fff;font-weight:700;padding:7px 16px;border-radius:30px;font-size:15px}
+.g-and{color:rgba(255,255,255,.7)}
+
+/* slide 41 : contrats cliquables */
+.ct-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ct-card{text-align:left;display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;cursor:pointer;font:inherit;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s,border-color .15s,background .15s}
+.ct-card:hover{transform:translateY(-2px);border-color:var(--flash)}
+.ct-card strong{font-family:'Playfair Display',serif;font-size:19px;color:var(--dark);line-height:1.2}
+.ct-num{font:700 12px/1 'Inter',sans-serif;letter-spacing:.12em;color:var(--flash)}
+.ct-k{font:700 11px/1 'Inter',sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--kaki);margin-top:4px}
+.ct-role{font-size:14px;color:var(--muted)}
+.ct-card.on .ct-k{color:#C9D3C9}
+.ct-more{margin-top:auto;font-size:13px;font-weight:600;color:var(--flash)}
+.ct-card.on{background:var(--dark);border-color:var(--dark)}
+.ct-card.on strong{color:#fff}.ct-card.on .ct-role{color:rgba(255,255,255,.75)}.ct-card.on .ct-num,.ct-card.on .ct-more{color:var(--flash-soft)}
+.ct-panels{margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:8px 26px;box-shadow:var(--shadow)}
+.ct-panel{display:none}.ct-panel.on{display:block;animation:tlIn .25s ease}
+.ct-print-title{display:none}
+.ct-dl{margin:0;display:grid;grid-template-columns:200px 1fr}
+.ct-dl dt{font:700 12.5px/1.4 'Inter',sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--flash);padding:16px 12px 16px 0;border-bottom:1px solid var(--line)}
+.ct-dl dd{margin:0;padding:16px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink)}
+.ct-dl dt:last-of-type,.ct-dl dd:last-of-type{border-bottom:0}
+.ct-dl dd.cond{font-weight:600;color:var(--dark)}
+@media(max-width:820px){.ct-cards{grid-template-columns:1fr}.ct-dl{grid-template-columns:1fr}.ct-dl dt{border-bottom:0;padding-bottom:2px}}
+
+/* slide 44 : organigramme */
+.org{display:flex;flex-direction:column;gap:22px}
+.org-top{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative}
+.org-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;padding-top:22px;border-top:2px solid var(--line)}
+.org-col{display:flex;flex-direction:column;gap:10px}
+.org-box{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink);text-align:center}
+.org-box.lead{background:var(--dark);color:#fff;border-color:var(--dark);font-weight:600}
+.bg-alt .org-box{background:#FBFBF9}
+@media(max-width:760px){.org-top,.org-cols{grid-template-columns:1fr 1fr}}
+
+/* slide 37 */
+.model-card.force .section-label{margin-bottom:6px}
+
+/* ---------- Concept V2 (planche d'intention encapsulée .ghc) ---------- */
+.ghc{position:relative;display:block;overflow:hidden}
+.ghc section{padding:0;scroll-margin-top:0}
+.ghc p{color:inherit}
+.ghc h1 em,.ghc h2 em{color:inherit}
+@media print{.ghc .slide{break-before:page}.ghc .s1 .big,.ghc .s3 .main{min-height:0!important}.ghc .s2 .tall{height:auto!important}.ghc .s2 .duo{grid-template-rows:auto!important}}
+
+@media print{
+  .myov-demo section,.ghc section{break-before:auto!important;padding:0!important}
+  .tl-panel,.ct-panel{display:block!important;margin-bottom:3mm}
+  .tl-print-title,.ct-print-title{display:block!important;font-size:10px!important;color:var(--flash);margin:2mm 0 1mm}
+  .tl-track,.ct-cards .ct-more{display:none!important}
+  .gallery-track{transform:none!important;display:grid!important;grid-template-columns:repeat(3,1fr);gap:2mm}
+  .gnav,.gdots,.gthumbs{display:none!important}
+  .flow3{grid-template-columns:1fr auto 1fr auto 1fr!important}
+  .overlay-map .pin{width:3.5mm;height:3.5mm;font-size:6px}
+  .maplabel{font-size:6.5px;padding:.5mm 1mm}
+}
+
+/* ===== retouches v2 ===== */
+.brand .oslogo{height:13px}
+.hotel-card .hotel-logo{height:84px;width:100%;max-width:200px;object-fit:contain;object-position:left center;margin:0 0 16px;display:block}
+table thead th{vertical-align:top}
+.mid thead th,.tbl-center thead th{text-align:center}
+.mid thead th:first-child,.tbl-center thead th:first-child{text-align:left}
+.bench thead th{text-align:center;vertical-align:middle}
+.bench thead th:first-child{text-align:left}
+.num-right thead th:not(:first-child){text-align:right}
+.topline{width:100%}
+.pl6 th,.pl6 td{white-space:nowrap}
+.pl6 thead th{vertical-align:top;text-align:left}
+.pl6 thead th:nth-child(2),.pl6 thead th:nth-child(3),.pl6 thead th:nth-child(5),
+.pl6 td:nth-child(2),.pl6 td:nth-child(3),.pl6 td:nth-child(5){text-align:right;font-variant-numeric:tabular-nums}
+.pl6 td:nth-child(4){color:var(--muted);text-align:left!important}
+.pl6 td:nth-child(6){white-space:normal;color:var(--muted);font-size:12px;min-width:240px;line-height:1.4;text-align:left!important}
+.pl6 .yr{display:block}
+.cf-table.bp thead th{vertical-align:top;text-align:right}
+.cf-table.bp thead th .yr{display:block}
+.cf-table.bp td{font-variant-numeric:tabular-nums}
+.cf-table tr.marge td{font-style:italic;font-size:10.5px;color:var(--muted)}
+.bp-h{margin:0 0 10px}
+.bench-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:stretch}
+@media(min-width:900px){.bench-grid{grid-template-columns:minmax(0,1fr) minmax(0,2.4fr)}}
+.bench-grid .card{display:flex;flex-direction:column;justify-content:center}
+.bench-fig{margin:0;display:flex}
+.bench-fig img{width:100%;height:100%;object-fit:contain;background:#fff}
+.click-hint{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);font-style:italic;margin:0 0 14px}
+.click-hint::before{content:"";width:18px;height:18px;flex:0 0 18px;border-radius:50%;border:1.5px solid var(--flash);
+  background:radial-gradient(circle,var(--flash) 0 3px,transparent 3.5px)}
+.guarantee{background:var(--paper);color:var(--dark);border:1px solid var(--line);box-shadow:var(--shadow)}
+.bg-alt .guarantee{background:#FBFBF9}
+.g-label{color:var(--dark)}
+.g-val{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:var(--dark)}
+.ct-dl dd.cond{font-weight:400;color:var(--ink)}
+.overlay-map.imgzoomable{cursor:zoom-in}
+.imgzoom-overlay .overlay-map.zoomed{max-width:none;margin:0;border-radius:8px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55);cursor:zoom-out}
+.imgzoom-overlay .overlay-map.zoomed>img{max-width:none;max-height:none;border-radius:0;box-shadow:none;width:100%}
+.overlay-map.zoomed .pin{width:30px;height:30px;font-size:14px}
+.overlay-map.zoomed .maplabel{font-size:16px;padding:6px 10px}
+.overlay-map.zoomed .maplabel.station img{width:18px;height:18px}
+@media(max-width:700px){.overlay-map.zoomed .pin{width:20px;height:20px;font-size:10px}.overlay-map.zoomed .maplabel{font-size:11px}}
+
+#s38{overflow-x:clip}
+@media(max-width:900px){.mvlap-base{width:100%}}
+/* v2b */
+.hotel-card .hotel-logo{height:96px;max-width:none;width:100%;object-position:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px}
+.bench-grid{grid-template-columns:1fr!important}
+.bench-grid .card{display:block}
+.pl6{table-layout:fixed;min-width:980px}
+.pl6 th:nth-child(1){width:22%}.pl6 th:nth-child(2),.pl6 th:nth-child(3){width:11%}.pl6 th:nth-child(4){width:13%}.pl6 th:nth-child(5){width:11%}.pl6 th:nth-child(6){width:32%}
+.pl6 td:nth-child(3){color:var(--ink)}
+.pl6 th{white-space:normal}
+.pl6 td:nth-child(1){white-space:normal}
+.pl6 td.cmt{font-weight:400!important;min-width:0}
+.bench{table-layout:fixed;min-width:1060px}
+.bench th:first-child{width:15%}
+.bench thead th{white-space:normal;font-size:11px;padding:10px 6px}
+.bench thead th.hl{background:var(--flash)!important;color:#fff}
+.bench td{text-align:center;white-space:normal}
+.bench td:first-child{text-align:left}
+
+/* v3 */
+#s09 .bench{min-width:1300px}
+#s10 .bench{min-width:1420px}
+.bench th,.bench td{word-break:normal;overflow-wrap:normal;hyphens:none}
+.bench th:first-child{width:170px}
+.pl6 thead th,.pl6 thead th:nth-child(n){text-align:center!important;vertical-align:middle}
+
+.lg{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:10px}
+.lg-item{display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:2px 0;font:400 11.5px/1.3 'Inter',sans-serif;color:var(--muted);cursor:pointer}
+.lg-item.off{opacity:.4;text-decoration:line-through}
+.lg-sq{width:12px;height:12px;border-radius:2px;display:inline-block}
+.lg-ln{width:30px;height:6px}
+
+/* BP : années centrées + ligne de mentions */
+.cf-table.bp thead th{text-align:center!important;vertical-align:middle}
+.cf-table.bp thead tr.yr-row th{padding-bottom:4px;font-size:12.5px}
+.cf-table.bp thead tr.sub-row th{background:var(--dark-2)!important;color:var(--flash-soft);font-size:11px;font-weight:600;text-transform:none;letter-spacing:.02em;padding:6px 6px;border-bottom:0}
+.cf-table.bp td:not(:first-child){text-align:center!important}
+
+</style>
+</head>
+<body>
+
+<header data-chrome>
+  <div class="nav-inner">
+    <button class="nav-toggle" id="navToggle" aria-label="Menu des sections" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+    <a class="brand" href="#top">Grand Hôtel de Paris <span class="bx">&times;</span><img class="oslogo" src="assets/img/oversight-blanc.png" alt="Oversight" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'osfallback',textContent:'Oversight'}))"></a>
+    <nav class="menu" id="navMenu" aria-label="Sections"><div class="mgrid">
+      <a href="#s02"><span class="mnum">01</span>Notre vision pour le projet</a>
+      <a href="#s12"><span class="mnum">02</span>Le concept</a>
+      <a href="#s16"><span class="mnum">03</span>Les caractéristiques du Projet Grand Hôtel de Paris</a>
+      <a href="#s25"><span class="mnum">04</span>Les prévisions d’exploitation</a>
+      <a href="#s35"><span class="mnum">05</span>Le modèle Oversight</a>
+      <a href="#s43"><span class="mnum">06</span>Annexes</a>
+    </div></nav>
+  </div>
+</header>
+<div class="sticky-theme" id="stickyTheme" data-chrome><div class="container"><span id="stickyLabel"></span></div></div>
+<span id="top"></span>
+
+<!-- ===== 1 · COUVERTURE ===== -->
+<section id="s01" data-slide="1" class="hero brandgrad grain">
+  <div class="hero-content hero-cover">
+    <div class="eyebrow" data-chrome>72 boulevard de Strasbourg · 75010 Paris</div>
+    <h1>Grand Hôtel de Paris :<br><em>révéler une identité, construire ensemble sa valeur</em></h1>
+    <a class="cta" href="#s03">Découvrir notre vision du projet <span class="arw" data-chrome>→</span></a>
+  </div>
+  <div class="scroll-cue" data-chrome><span>défiler</span><span class="line"></span></div>
+</section>
+
+<!-- ===== 2 · SECTION : NOTRE VISION ===== -->
+<section id="s02" data-slide="2" class="divider-section">
+  <div class="container">
+    <h2>Notre vision <em>pour le projet</em></h2>
+    <p>Révéler l’identité du lieu, en faire une référence durable sur son marché et maximiser son potentiel de valorisation : c’est précisément le type de projet pour lequel notre modèle crée le plus de valeur.</p>
+  </div>
+</section>
+
+<!-- ===== 3-4 · VISION ===== -->
+<section id="s03" data-slide="3" data-label="Pourquoi souhaitons-nous porter ce projet à vos côtés ?" class="bg-alt">
+  <div class="container">
+    <div class="vision-block">
+      <h3 class="vision-q">Pourquoi souhaitons-nous porter ce projet à vos côtés ?</h3>
+      <div class="keylearning"><p>Une vision commune du partenariat et de la création de valeur.</p></div>
+      <p>Le Grand Hôtel de Paris incarne pleinement la vision que nous portons chez Oversight : accompagner les propriétaires dans la création d'adresses indépendantes, capables de conjuguer excellence opérationnelle et performance durable.</p>
+      <ul class="list-clean">
+        <li>Une approche fondée sur la <strong>collaboration étroite</strong> entre propriétaires et cabinet de gestion</li>
+        <li>Un <strong>équilibre</strong> entre satisfaction client, excellence opérationnelle et performance économique</li>
+        <li>Une <strong>vision de long terme</strong> fondée sur une prise de décision data-driven objective pour une création de valeur plus pérenne et maîtrisée</li>
+        <li>Une volonté commune de <strong>révéler l’identité unique du lieu</strong></li>
+        <li>Un projet <strong>en cohérence</strong> avec notre stratégie de croissance sélective et notre expertise des hôtels indépendants</li>
+      </ul>
+    </div>
+    <div class="vision-block" id="s04" data-slide-ref="4">
+      <h3 class="vision-q">En quoi notre expérience constitue-t-elle un atout pour le projet ?</h3>
+      <div class="keylearning"><p>Un hôtel qui ressemble à ceux que nous avons déjà fait grandir.</p></div>
+      <p>Le Grand Hôtel de Paris correspond précisément aux <strong>typologies d'hôtels que nous savons exploiter, développer et valoriser.</strong></p>
+      <ul class="list-clean">
+        <li>Une <strong>connaissance fine du marché parisien</strong> et une <strong>expertise du secteur</strong>, nourrie par l’accompagnement de l’Hôtel Louis Blanc 3*</li>
+        <li>Un actif à fort potentiel de valorisation, en cohérence avec notre <strong>expérience auprès de propriétaires privés et indépendants</strong></li>
+        <li>Une <strong>taille</strong> d'établissement cohérente avec notre portefeuille (≈ 70 clés en moyenne) et un <strong>positionnement maîtrisé</strong> (11 hôtels 4* et 5* accompagnés en 2026)</li>
+        <li>Des références reconnues dans le <strong>repositionnement et la montée en valeur d'actifs</strong> : Victoria Palace Hôtel 4* (6e), Hôtel Marignan Champs-Élysées 5* (8<sup>e</sup>), Hôtel des Grands Voyageurs 4* (6e), Le Tsuba Hôtel 4* (17e), Hôtel Hôbou 4* (Boulogne-Billancourt), Dadou Paris 4* (17e)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5 · UN MODÈLE QUI PERFORME ===== -->
+<section id="s05" data-slide="5">
+  <div class="container">
+    <h2 class="section-title">Un modèle <em>qui performe</em></h2>
+    <div class="keylearning"><p>12 hôtels, un même résultat : une performance supérieure au marché.</p></div>
+    <div class="grid-2 even">
+      <div>
+        <h4 class="sub">Nos chiffres clés en 2025.</h4>
+        <div class="stats-row">
+          <div class="stat-card"><div class="num">12</div><div class="label">hôtels</div></div>
+          <div class="stat-card"><div class="num">852</div><div class="label">clés</div></div>
+          <div class="stat-card"><div class="num">65 M€</div><div class="label">volume d’affaires</div></div>
+          <div class="stat-card"><div class="num">+290</div><div class="label">employés accompagnés</div></div>
+        </div>
+      </div>
+      <div>
+        <h4 class="sub">Nos performances en 2025 – comparaison vs InExtenso <sup>(1)</sup></h4>
+        <div class="stats-row three">
+          <div class="stat-card"><div class="num">+7,6 pts</div><div class="label">taux d’occupation</div></div>
+          <div class="stat-card"><div class="num">+0,3 %</div><div class="label">PM</div></div>
+          <div class="stat-card"><div class="num">+9 %</div><div class="label">RevPAR</div></div>
+        </div>
+        <p class="small-note">Périmètre : portefeuille entier Oversight. (1) InExtenso : Hit Report, périmètre InExtenso constant retenu pour chacun de nos hôtels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6 · HÔTELS ACCOMPAGNÉS À PROXIMITÉ ===== -->
+<section id="s06" data-slide="6" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Les hôtels accompagnés par Oversight situés <em>à proximité du Grand Hôtel de Paris</em></h2>
+    <div class="keylearning"><p>Une connaissance du marché du 3* et 4* sur le nord de Paris.</p></div>
+    <div class="map overlay-map" style="margin-bottom:26px">
+      <img src="assets/img/s06_8.png" alt="Carte des hôtels accompagnés par Oversight à proximité du Grand Hôtel de Paris">
+      <span class="pin pin-flash" style="left:89.9%;top:31.8%">1</span>
+      <span class="pin pin-flash" style="left:13.3%;top:32.2%">2</span>
+      <span class="pin pin-flash" style="left:10.2%;top:40.8%">3</span>
+      <span class="maplabel ghp" style="left:55.7%;top:67%">Grand Hôtel de Paris</span>
+      <span class="maplabel station" style="left:1.8%;top:64.6%"><img src="assets/img/s06_37.png" alt="">Gare Saint-Lazare</span>
+      <span class="maplabel station" style="left:73.4%;top:61.6%"><img src="assets/img/s06_37.png" alt="">Gare de l’Est</span>
+      <span class="maplabel station" style="left:64.7%;top:31.8%"><img src="assets/img/s06_37.png" alt="">Gare du Nord</span>
+    </div>
+    <div class="grid-3">
+      <div class="card hotel-card">
+        <span class="pin pin-flash static" data-chrome>1</span>
+        <img class="hotel-logo" src="assets/img/logo-hplb.png" alt="Hotel Paris Louis Blanc">
+        <ul class="kv">
+          <li>Chambres : 91</li><li>Date de rénovation : 2022</li><li>Étoiles : 3</li><li>Style : Moderne, coloré, lumineux</li><li>Adresse : 232 Rue du Faubourg Saint-Martin, 75010 Paris</li><li>Distance : 950 m</li><li>Services : cour-jardin arborée</li>
+        </ul>
+        <div class="table-wrap rate-table"><table><tbody>
+          <tr><td><img src="assets/img/s06_14.png" alt=""></td><td>Google</td><td>4,1 / 5</td></tr>
+          <tr><td><img src="assets/img/s06_11.png" alt=""></td><td>Booking.com</td><td>8,5 / 10</td></tr>
+          <tr><td><img src="assets/img/s06_12.png" alt=""></td><td>Expedia</td><td>9,0 / 10</td></tr>
+          <tr><td><img src="assets/img/s06_13.png" alt=""></td><td>TripAdvisor</td><td>4,1 / 5</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="card hotel-card">
+        <span class="pin pin-flash static" data-chrome>2</span>
+        <img class="hotel-logo" src="assets/img/logo-cardinal.png" alt="Le Cardinal Paris">
+        <ul class="kv">
+          <li>Chambres : 80</li><li>Date de rénovation : 2025</li><li>Étoiles : 4</li><li>Style : Moderne, feutré, autour de la nature</li><li>Adresse : 3 Rue du Cardinal Mercier, 75009 Paris</li><li>Distance : 2 500 m</li><li>Services : Honesty bar, sauna, salle de sport, salle immersive, cour-jardin arborée</li>
+        </ul>
+        <div class="table-wrap rate-table"><table><tbody>
+          <tr><td><img src="assets/img/s06_14.png" alt=""></td><td>Google</td><td>4,4 / 5</td></tr>
+          <tr><td><img src="assets/img/s06_11.png" alt=""></td><td>Booking.com</td><td>8,7 / 10</td></tr>
+          <tr><td><img src="assets/img/s06_12.png" alt=""></td><td>Expedia</td><td>9,4 / 10</td></tr>
+          <tr><td><img src="assets/img/s06_13.png" alt=""></td><td>TripAdvisor</td><td>4,8 / 5</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="card hotel-card">
+        <span class="pin pin-flash static" data-chrome>3</span>
+        <img class="hotel-logo" src="assets/img/logo-opera-liege.png" alt="Opéra Liège Paris">
+        <ul class="kv">
+          <li>Chambres : 48</li><li>Date d’ouverture : 2015</li><li>Étoiles : 4</li><li>Style : Contemporain</li><li>Adresse : 9 Rue de Liège, 75009 Paris</li><li>Distance : 2 600 m</li><li>Services : Honesty bar, salle de sport, rooftop, cour-jardin arborée</li>
+        </ul>
+        <div class="table-wrap rate-table"><table><tbody>
+          <tr><td><img src="assets/img/s06_14.png" alt=""></td><td>Google</td><td>4,5 / 5</td></tr>
+          <tr><td><img src="assets/img/s06_11.png" alt=""></td><td>Booking.com</td><td>9,0 / 10</td></tr>
+          <tr><td><img src="assets/img/s06_12.png" alt=""></td><td>Expedia</td><td>9,4 / 10</td></tr>
+          <tr><td><img src="assets/img/s06_13.png" alt=""></td><td>TripAdvisor</td><td>4,5 / 5</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7 · LOCALISATION ===== -->
+<section id="s07" data-slide="7">
+  <div class="container">
+    <h2 class="section-title">Localisation - 72 boulevard de Strasbourg, <em>75010 Paris</em></h2>
+    <div class="keylearning"><p>Au cœur du premier hub ferroviaire d'Europe.</p></div>
+    <div class="grid-2 wide-left">
+      <div>
+        <div class="loc-legend">
+          <span class="loc-ghp"><span class="pin-ghp"></span>Grand Hôtel de Paris</span>
+          <span class="loc-lines"><img src="assets/img/s07_11.png" alt="Métro"><span class="mline" style="background:#0055C8">2</span><span class="mline" style="background:#BE418D">4</span><span class="mline dark" style="background:#FF7E2E">5</span><span class="mline dark" style="background:#EFA9C1">7</span></span>
+          <span class="loc-lines"><img src="assets/img/s07_12.png" alt="RER"><span class="mline" style="background:#5291CE">B</span><span class="mline" style="background:#00814F">D</span><span class="mline" style="background:#C04191">E</span></span>
+        </div>
+        <div class="map overlay-map">
+          <img src="assets/img/s07_7.png" alt="Carte du quartier du Grand Hôtel de Paris">
+          <span class="pin pin-dark" style="left:33.2%;top:14.9%">1</span>
+          <span class="pin pin-dark" style="left:46.2%;top:44.3%">2</span>
+          <span class="pin pin-flash" style="left:29.0%;top:43.2%">1</span>
+          <span class="pin pin-flash" style="left:64.8%;top:67.8%">2</span>
+          <span class="pin pin-flash" style="left:29.0%;top:83.5%">3</span>
+          <span class="pin pin-flash" style="left:30.0%;top:88.6%">4</span>
+          <span class="pin pin-flash" style="left:18.8%;top:94.0%">5</span>
+          <span class="pin pin-kaki" style="left:63.0%;top:50.5%">1</span>
+          <span class="pin pin-kaki" style="left:75.7%;top:19.0%">2</span>
+          <span class="pin pin-kaki" style="left:40.4%;top:80.3%">3</span>
+          <span class="maplabel ghp" style="left:12%;top:48.5%">Grand Hôtel de Paris</span>
+        </div>
+      </div>
+      <div>
+        <h4 class="mini">Mobilité</h4>
+        <ol class="numlist pin-list-dark">
+          <li>Gare du Nord – Eurostar, RER B (CDG), D, E</li>
+          <li>Gare de l'Est – TGV Est, métro 4, 5, 7</li>
+        </ol>
+        <h4 class="mini" style="margin-top:18px">Centres d'activité loisirs</h4>
+        <ol class="numlist flash">
+          <li>Marché couvert Saint-Quentin</li>
+          <li>Canal Saint-Martin (écluses des Récollets)</li>
+          <li>Passage Brady</li>
+          <li>Théâtre Antoine</li>
+          <li>Porte Saint-Denis</li>
+        </ol>
+        <h4 class="mini" style="margin-top:18px">Pôles d'activité</h4>
+        <ol class="numlist kaki">
+          <li>Pôle tech, 117 quai de Valmy (Alan, Gleamer…)</li>
+          <li>Conseil de prud'hommes de Paris</li>
+          <li>Mairie du 10e arrondissement</li>
+        </ol>
+        <ul class="list-clean tight" style="margin-top:18px">
+          <li><strong>Accès direct en RER B ou D : </strong>La Plaine Saint-Denis (quartier d'affaires, Stade de France), Parc des expositions de Villepinte, Le Bourget, aéroport CDG</li>
+          <li><strong>Plusieurs hôpitaux à proximité : </strong>Lariboisière, Fernand-Widal et Saint-Louis, source de demande liée aux patients, familles et professionnels de santé</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="sep">
+    <div class="grid-3">
+      <div class="card flat">
+        <h4 class="mini">Emplacement</h4>
+        <ul class="list-clean tight">
+          <li>Sur le boulevard de Strasbourg, à <strong>2 min à pied de la Gare de l'Est</strong> et 10 min de la Gare du Nord</li>
+          <li>À la rencontre de <strong>trois univers</strong> : le hub ferroviaire au nord, le canal Saint-Martin à l'est, le faubourg Saint-Denis et ses théâtres au sud</li>
+          <li>Montmartre, les Grands Boulevards et le Marais à 15-20 min à pied ou en métro</li>
+        </ul>
+      </div>
+      <div class="card flat">
+        <h4 class="mini">Un hub européen</h4>
+        <ul class="list-clean tight">
+          <li><strong>Premier nœud ferroviaire d'Europe</strong> : environ 700 000 voyageurs par jour à la Gare du Nord</li>
+          <li>Londres et Bruxelles en direct (Eurostar), l'Est de la France et l'Allemagne (TGV Est), l'aéroport CDG en RER B</li>
+        </ul>
+      </div>
+      <div class="card flat">
+        <h4 class="mini">Clientèles</h4>
+        <ul class="list-clean tight">
+          <li><strong>Loisirs</strong> : courts séjours européens (Royaume-Uni, Benelux, Allemagne) et voyageurs en quête d'un Paris vivant</li>
+          <li><strong>Affaires</strong> : voyageurs en transit, trois hôpitaux AP-HP, start-up du canal Saint-Martin, conseil de prud'hommes, salons de Villepinte et du Bourget en direct</li>
+          <li><strong>Soirées</strong> : public des théâtres et salles du boulevard (Antoine, La Scala, Porte Saint-Martin, New Morning)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fw-fw" style="margin-top:22px">
+      <div class="fw-box forces"><h4>Forces</h4>
+        <ul class="list-clean tight">
+          <li><strong>Connectivité exceptionnelle</strong> : Eurostar, TGV Est, RER B (CDG direct), D, E, métro 4, 5, 7</li>
+          <li><strong>Quartier vivant et culturel</strong> : faubourg Saint-Denis, passage Brady, marché Saint-Quentin, théâtres, canal Saint-Martin</li>
+          <li><strong>Image en amélioration</strong> : abords de la Gare du Nord réaménagés (2026), projet Paris Nord-Est (600 ha) entre la Porte de la Chapelle et la Porte de la Villette, pour en faire un nouveau quartier de bureaux, de logements et d'équipements.</li>
+          <li><strong>Demande ferroviaire régulière</strong> toute l'année, en semaine comme le week-end</li>
+        </ul></div>
+      <div class="fw-box faiblesses"><h4>Faiblesses</h4>
+        <ul class="list-clean tight">
+          <li><strong>Sécurité et propreté perçues comme dégradées</strong> autour des gares</li>
+          <li><strong>Offre 4 étoiles dense et récente </strong>: 21 comparables à moins d’1 km (vs 36 hôtels 3* sur la même zone), 13 neufs ou rénovés depuis 2019</li>
+          <li><strong>Boulevard très passant</strong> : isolation phonique indispensable</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8 · PAYSAGE CONCURRENTIEL ===== -->
+<section id="s08" data-slide="8" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Paysage concurrentiel <em>du micro-marché</em></h2>
+    <div class="keylearning"><p>Un marché 4 étoiles dense et très jeune : 21 comparables à moins d'1 km à pied du Grand Hôtel de Paris.</p></div>
+    <div class="grid-2 wide-left">
+      <div>
+        <h3 class="blk">Typologie de l'offre 4 étoiles de la zone</h3>
+        <ul class="list-clean">
+          <li><strong>21 comparables 4 étoiles analysés</strong> sur la zone, tous à moins d'1 km à pied, pour 1 437 chambres.</li>
+          <li><strong>Taille médiane de 45 chambres</strong>, contre 50 pour le Grand Hôtel de Paris : le projet est dans la moyenne des établissements 4 étoiles de la zone.</li>
+          <li><strong>Un marché très jeune :</strong>
+            <ul class="list-clean tight" style="margin-top:8px">
+              <li class="l1"><strong>9 hôtels ont ouvert depuis 2019</strong>, soit 817 chambres et 57 % de l'offre 4 étoiles de la zone. Tandis que <strong>4 établissements </strong>ont subit des <strong>rénovations </strong>de leurs espaces et des chambres. </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="table-wrap" style="margin-top:18px"><table class="tbl-center compact">
+          <thead><tr><th>Année</th><th>Ouvertures</th><th>Chambres ouvertes</th><th>Rénovations</th><th>Hôtels concernés</th></tr></thead>
+          <tbody>
+            <tr><td>2019</td><td>3</td><td>490</td><td>–</td><td class="wrap">Grand Quartier, OKKO, 25hours</td></tr>
+            <tr><td>2020</td><td>1</td><td>40</td><td>–</td><td class="wrap">Les Deux Gares</td></tr>
+            <tr><td>2021</td><td>1</td><td>38</td><td>–</td><td class="wrap">Le Milie Rose</td></tr>
+            <tr><td>2023</td><td>3</td><td>201</td><td>2</td><td class="wrap">ESTÉ, Château d'Eau, Bloom · Rocroy, Flanelles</td></tr>
+            <tr><td>2025</td><td>–</td><td>–</td><td>2</td><td class="wrap">Hôtel Mercure Paris Opéra Grands Boulevards,<br>Hôtel NH Paris Gare de l’Est</td></tr>
+            <tr><td>2026</td><td>1</td><td>48</td><td>–</td><td class="wrap">Clubtrotteur</td></tr>
+            <tr class="sumrow boldrow"><td>Total</td><td>9</td><td>817</td><td>4</td><td class="wrap">13 hôtels sur 21</td></tr>
+          </tbody></table></div>
+      </div>
+      <div>
+        <div class="map overlay-map contain-map">
+          <img src="assets/img/s08_61.png" alt="Carte des 21 comparables 4 étoiles à moins d'1 km du Grand Hôtel de Paris">
+          <span class="pin pin-flash" style="left:68.3%;top:63.5%">1</span>
+          <span class="pin pin-flash" style="left:72.9%;top:62.1%">2</span>
+          <span class="pin pin-flash" style="left:50.1%;top:60.7%">3</span>
+          <span class="pin pin-kaki" style="left:42.1%;top:49.0%">4</span>
+          <span class="pin pin-kaki" style="left:40.0%;top:89.5%">5</span>
+          <span class="pin pin-kaki" style="left:69.5%;top:96.1%">6</span>
+          <span class="pin pin-kaki" style="left:67.4%;top:38.1%">7</span>
+          <span class="pin pin-kaki" style="left:70.9%;top:37.0%">8</span>
+          <span class="pin pin-kaki" style="left:44.7%;top:92.9%">9</span>
+          <span class="pin pin-kaki" style="left:27.4%;top:82.9%">10</span>
+          <span class="pin pin-kaki" style="left:52.7%;top:30.0%">11</span>
+          <span class="pin pin-kaki" style="left:56.5%;top:28.0%">12</span>
+          <span class="pin pin-kaki" style="left:62.5%;top:26.1%">13</span>
+          <span class="pin pin-grey" style="left:45.7%;top:26.7%">14</span>
+          <span class="pin pin-grey" style="left:75.2%;top:22.6%">15</span>
+          <span class="pin pin-grey" style="left:14.7%;top:80.2%">16</span>
+          <span class="pin pin-grey" style="left:9.5%;top:45.3%">17</span>
+          <span class="pin pin-grey" style="left:18.8%;top:27.1%">18</span>
+          <span class="pin pin-grey" style="left:4.2%;top:84.8%">19</span>
+          <span class="pin pin-grey" style="left:95.7%;top:9.5%">20</span>
+          <span class="pin pin-grey" style="left:23.6%;top:15.9%">21</span>
+          <span class="maplabel ghp" style="left:67.5%;top:65.5%">Grand Hôtel de Paris</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:26px">
+      <div><h4 class="mini">Moins de 300 m</h4><ol class="numlist flash">
+        <li>ESTÉ (70 m)</li><li>NH Gare de l'Est (130 m)</li><li>East Side (250 m)</li>
+      </ol></div>
+      <div><h4 class="mini">De 300 à 650 m</h4><ol class="numlist kaki" style="counter-reset:nl 3">
+        <li>Mademoiselle (400 m)</li><li>Aulivia Opéra (450 m)</li><li>Le Grand Quartier (450 m)</li><li>Les Deux Gares (450 m)</li><li>OKKO Gare de l'Est (470 m)</li><li>Château d'Eau (500 m)</li><li>Le Milie Rose (600 m)</li><li>Whistler (600 m)</li><li>Flanelles (600 m)</li><li>Habituel (630 m)</li>
+      </ol></div>
+      <div><h4 class="mini">De 650 m à 1 km</h4><ol class="numlist grey" style="counter-reset:nl 13">
+        <li>25hours Terminus Nord (690 m)</li><li>Clubtrotteur (700 m)</li><li>Mercure Opéra GB (770 m)</li><li>BW Faubourg 88 (890 m)</li><li>Le Rocroy (920 m)</li><li>Windsor Opéra (940 m)</li><li>Bloom House (990 m)</li><li>Avalon Cosy (1000 m)</li>
+      </ol></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9 · ENVIRONNEMENT IMMÉDIAT ===== -->
+<section id="s09" data-slide="9">
+  <div class="container">
+    <h2 class="section-title">Environnement concurrentiel immédiat <em>(&lt; 500 m)</em></h2>
+    <div class="keylearning"><p>Un environnement immédiat récent mais moins bien noté : les boutiques-hôtels et hôtels lifestyle plafonnent à 8,3 sur Booking.</p></div>
+    <div class="table-wrap"><table class="mid compact bench"><thead><tr><th></th><th class="hl">Grand Hôtel de Paris - Projet</th><th>ESTÉ</th><th>NH Gare de l&#x27;Est</th><th>East Side</th><th>Mademoiselle</th><th>Aulivia Opéra</th><th>Le Grand Quartier</th><th>Les Deux Gares</th><th>OKKO Gare de l&#x27;Est</th><th>Château d&#x27;Eau</th></tr></thead><tbody><tr><td class="k">Nombre d&#x27;étoiles</td><td class="hl">4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td></tr><tr><td class="k">Nombre de chambres</td><td class="hl">50</td><td>76</td><td>207</td><td>45</td><td>53</td><td>32</td><td>83</td><td>40</td><td>170</td><td>34</td></tr><tr><td class="k">Note Booking.com</td><td class="hl">-</td><td>8,6</td><td>8,4</td><td>7,9</td><td>8,3</td><td>8,1</td><td>8,7</td><td>8,2</td><td>8,6</td><td>8,0</td></tr><tr><td class="k">Date de rénovation</td><td class="hl">2028</td><td>2023</td><td>2025</td><td>2010</td><td>2013</td><td>n.c.</td><td>2019</td><td>2020</td><td>2019</td><td>2023</td></tr><tr><td class="k">Distance à pied (en m)</td><td class="hl">–</td><td>70</td><td>130</td><td>250</td><td>400</td><td>450</td><td>450</td><td>450</td><td>470</td><td>500</td></tr><tr><td class="k">Groupe</td><td class="hl">Indépendant</td><td>Indépendant</td><td>NH Hotels</td><td>Radisson Ind.</td><td>Indépendant</td><td>Indépendant</td><td>Indépendant</td><td>Touriste</td><td>OKKO Hotels</td><td>Touriste</td></tr><tr><td class="k">Positionnement</td><td class="hl">Boutique hôtel</td><td>Bien-être</td><td>Grande capacité</td><td>Fonctionnel</td><td>Boutique / bien-être</td><td>Fonctionnel</td><td>Lieu de vie</td><td>Lifestyle / bien-être</td><td>Lieu de vie</td><td>Lifestyle</td></tr><tr class="sumrow boldrow"><td class="k">Services Annexes</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Salle de réunion</td><td class="hl"></td><td></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr><tr><td class="k">Restaurant</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td></td></tr><tr><td class="k">Bar</td><td class="hl">À confirmer</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td></td></tr><tr><td class="k">Sauna</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td></td></tr><tr><td class="k">Hammam</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td></tr><tr><td class="k">Fitness</td><td class="hl">À confirmer</td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr><tr><td class="k">Cabine de soin</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td></tr><tr><td class="k">Jacuzzi</td><td class="hl"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Piscine</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Terrasse / jardin</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td></td></tr></tbody></table></div>
+    <div class="grid-2 even" style="margin-top:26px">
+      <div class="card"><h4 class="mini">Un micro-marché récent, dominé par les grandes capacités</h4>
+        <ul class="list-clean tight">
+          <li><strong>Au total 9 hôtels 4 étoiles sont présents à moins de 500 m</strong>, pour 740 chambres</li>
+          <li><strong>7 sur 9 ouverts ou rénovés depuis 2019</strong></li>
+          <li>NH, OKKO et le Grand Quartier<strong> concentrent 62 % des chambres</strong></li>
+          <li>Seulement <strong>2 proposent des restaurants</strong> (ESTÉ, Grand Quartier) mais <strong>3 ont des offres bien-être</strong></li>
+        </ul></div>
+      <div class="card"><h4 class="mini">Les hôtels de la taille du Grand Hôtel de Paris plafonnent à 8,3</h4>
+        <ul class="list-clean tight">
+          <li><strong>5 hôtels de 32 à 53 chambres</strong>, comme le Grand Hôtel de Paris (50 clés)</li>
+          <li><strong>Fonctionnels</strong> : Aulivia 8,1, East Side 7,9</li>
+          <li><strong>Lifestyle à déco marquée</strong> (groupe Touriste) : Château d'Eau 8,0, Les Deux Gares 8,2</li>
+          <li><strong>Boutique bien-être</strong> : Mademoiselle 8,3</li>
+          <li><strong>3 des 4 plus faibles notes</strong> des 21 comparables sont ici</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10 · ENVIRONNEMENT ÉLARGI ===== -->
+<section id="s10" data-slide="10" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Environnement concurrentiel élargi <em>(500 m à 1 000 m)</em></h2>
+    <div class="keylearning"><p>Au-delà de 500 m, les boutiques-hôtels de charme peu équipés tirent les notes vers le haut.</p></div>
+    <div class="table-wrap"><table class="mid compact bench"><thead><tr><th></th><th class="hl">Grand Hôtel de Paris - Projet</th><th>Le Milie Rose</th><th>Whistler</th><th>Flanelles</th><th>Habituel</th><th>25hours Terminus Nord</th><th>Clubtrotteur</th><th>Mercure Opéra GB</th><th>BW Faubourg 88</th><th>Le Rocroy</th><th>Windsor Opéra</th></tr></thead><tbody><tr><td class="k">Nombre d&#x27;étoiles</td><td class="hl">4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td></tr><tr><td class="k">Nombre de chambres</td><td class="hl">50</td><td>38</td><td>31</td><td>44</td><td>27</td><td>237</td><td>48</td><td>52</td><td>29</td><td>48</td><td>24</td></tr><tr><td class="k">Note Booking.com</td><td class="hl">-</td><td>9,0</td><td>8,4</td><td>8,5</td><td>8,7</td><td>8,5</td><td>4,5</td><td>8,4</td><td>8,3</td><td>8,2</td><td>8,7</td></tr><tr><td class="k">Date de rénovation</td><td class="hl">2028</td><td>2021</td><td>2017</td><td>2023</td><td>2017</td><td>2019</td><td>2026</td><td>2025</td><td>2013</td><td>2023</td><td>2013</td></tr><tr><td class="k">Distance à pied (en m)</td><td class="hl">–</td><td>600</td><td>600</td><td>600</td><td>630</td><td>690</td><td>700</td><td>770</td><td>890</td><td>920</td><td>940</td></tr><tr><td class="k">Groupe</td><td class="hl">Indépendant</td><td>Indépendant</td><td>Hospya</td><td>Indépendant</td><td>Indépendant</td><td>Accor</td><td>Marriott</td><td>Accor</td><td>Best Western</td><td>Indépendant</td><td>Indépendant</td></tr><tr><td class="k">Positionnement</td><td class="hl">Boutique hôtel</td><td>Charme</td><td>Thème train</td><td>Charme</td><td>Charme</td><td>Lieu de vie</td><td>Thème voyage</td><td>Fonctionnel</td><td>Fonctionnel</td><td>Fonctionnel</td><td>Charme</td></tr><tr class="sumrow boldrow"><td class="k">Services Annexes</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Salle de réunion</td><td class="hl"></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td></tr><tr><td class="k">Restaurant</td><td class="hl"></td><td></td><td></td><td></td><td></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Bar</td><td class="hl">À confirmer</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr><tr><td class="k">Sauna</td><td class="hl"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Hammam</td><td class="hl"></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Fitness</td><td class="hl">À confirmer</td><td></td><td></td><td></td><td></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td><span class="check">✓</span></td><td></td></tr><tr><td class="k">Cabine de soin</td><td class="hl"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Jacuzzi</td><td class="hl"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Piscine</td><td class="hl"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td class="k">Terrasse / jardin</td><td class="hl"></td><td><span class="check">✓</span></td><td></td><td><span class="check">✓</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+    <div class="grid-2 even" style="margin-top:26px">
+      <div class="card"><h4 class="mini">Les équipements font peu la note</h4>
+        <ul class="list-clean tight">
+          <li>Le Milie Rose (9,0), le Windsor et l'Habituel (8,7) n'ont qu'<strong>un ou deux services</strong> et sont dans le haut du classement</li>
+          <li>Le spa apporte peu : <strong>8,50 de moyenne</strong> pour les 6 hôtels avec bien-être, contre 8,39 (≈ 0,1 point)</li>
+        </ul></div>
+      <div class="card"><h4 class="mini">La note se gagne sur l'accueil, le design et le lieu de vie</h4>
+        <ul class="list-clean tight">
+          <li>Les boutiques de charme atteignent <strong>8,5 à 9,0</strong> : typologie d’établissement la plus proche du Grand Hôtel de Paris par la taille</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 11 · BENCHMARK DES SUPERFICIES ===== -->
+<section id="s11" data-slide="11">
+  <div class="container">
+    <h2 class="section-title">Benchmark des superficies <em>des chambres</em></h2>
+    <div class="keylearning"><p>Des superficies maximales supérieures à la moyenne, avec une offre d’entrée de gamme plus compacte.</p></div>
+    <div class="bench-grid">
+      <div class="card">
+        <p>Avec 50 chambres de 9,8 à 28,7 m², le projet présente une superficie maximale supérieure à la moyenne des superficies maximales des 23 établissements de l’échantillon (24,7 m²), tandis que sa superficie minimale est inférieure à la moyenne des superficies minimales (12,6 m²). </p>
+        <p>Cette amplitude permet au Grand Hôtel de Paris de combiner une offre compacte et des chambres de plus grande capacité.</p>
+      </div>
+      <figure class="figure bench-fig"><img src="assets/img/s11_bench.png" alt="Benchmark des superficies des chambres"></figure>
+    </div>
+  </div>
+</section>
+<!-- ===== 12 · SECTION : LE CONCEPT ===== -->
+<section id="s12" data-slide="12" class="divider-section">
+  <div class="container">
+    <h2>Le <em>concept</em></h2>
+    <p>Un positionnement art déco parisien intemporel, décliné sur l’ensemble de l’hôtel et faisant référence à l’histoire du quartier.</p>
+  </div>
+</section>
+
+<!-- ===== 13 · LE CONCEPT RETENU ===== -->
+<section id="s13" data-slide="13" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Le concept retenu – <em>Art déco parisien</em></h2>
+    <div class="keylearning"><p>Un boutique-hôtel à l'identité affirmée, équipé au meilleur niveau du 4 étoiles. </p></div>
+    <div class="grid-2 even">
+      <div class="card"><h4 class="mini">Qu'est-ce que l'art déco parisien ?</h4>
+        <p><strong>L'élégance géométrique des années 1920-30</strong> : lignes arrondies, laiton patiné, bois sombres, mosaïques, verre strié. Une version chaleureuse et habitée, inspirée des passages couverts, des bistrots et des devantures du 10e, plutôt que le registre palace.</p></div>
+      <div class="card"><h4 class="mini">Pourquoi l'art déco ?</h4>
+        <p>Un style <strong>ancré dans l'histoire du quartier</strong> (boulevard de Strasbourg, théâtres, passages), qui donne immédiatement une identité de boutique-hôtel et <strong>fonctionne dans des chambres d'environ 16 m²</strong> grâce au sur-mesure. Face aux boutiques lifestyle à la déco très appuyée, il offre une identité forte mais <strong>intemporelle</strong>.</p></div>
+    </div>
+    <h3 class="blk">Les trois piliers du concept</h3>
+    <div class="grid-3">
+      <div class="model-card"><strong>Une identité</strong><p>l'art déco parisien, décliné du lobby aux chambres</p></div>
+      <div class="model-card"><strong>Un format</strong><p>un boutique-hôtel de 50 clés, intime, à l'accueil personnalisé</p></div>
+      <div class="model-card"><strong>Un niveau d'équipement</strong><p>le meilleur du 4 étoiles en chambre</p></div>
+    </div>
+    <div class="grid-4" style="margin-top:30px">
+      <div class="icon-card">
+        <img src="assets/img/icon-stars.svg" alt="">
+        <h4>L'esprit</h4>
+        <ul class="list-clean tight">
+          <li>Élégance géométrique, <strong>sans ostentation</strong></li>
+          <li>Un <strong>appartement parisien d'avant-guerre</strong>, habité et chiné</li>
+          <li>Chaleureux, des <strong>objets qui ont une histoire</strong></li>
+          <li><strong>Pas de pastiche Gatsby</strong> (doré, plumes, éventails)</li>
+          <li>Jamais kitsch : un art déco <strong>dosé avec mesure</strong>, par touches</li>
+        </ul>
+      </div>
+      <div class="icon-card">
+        <img src="assets/img/icon-palette.svg" alt="">
+        <h4>Matières et palette</h4>
+        <ul class="list-clean tight">
+          <li><strong>Une palette de couleurs </strong>: vert sapin, bleu encre, terracotta, bordeaux</li>
+          <li><strong>Laiton patiné</strong> comme métal unique</li>
+          <li>Noyer, cannage, velours, <strong>mosaïque</strong>, verre strié</li>
+        </ul>
+      </div>
+      <div class="icon-card">
+        <img src="assets/img/icon-sleep.svg" alt="">
+        <h4>Équipements en chambre</h4>
+        <ul class="list-clean tight">
+          <li><strong>Literie haut de gamme</strong> et tête de lit intégrée (éclairage, prises, tablettes)</li>
+          <li><strong>Douche à l'italienne</strong>, robinetterie laiton</li>
+          <li><strong>Insonorisation renforcée</strong>, rideaux occultants doublés</li>
+          <li>Climatisation, Wi-Fi haut débit, TV avec Chromecast </li>
+        </ul>
+      </div>
+      <div class="icon-card">
+        <img src="assets/img/icon-bell.svg" alt="">
+        <h4>Espaces communs</h4>
+        <ul class="list-clean tight">
+          <li>Le lobby-bar <strong>condense le style</strong></li>
+          <li><strong>Comptoir zinc ou bois cannelé</strong>, banquette en velours, mosaïque</li>
+          <li>Un <strong>café </strong>ouvert sur le boulevard, sous réserve de la libération des commerces du rez-de-chaussée</li>
+          <li>Une <strong>salle de fitness</strong> à l'étude, attendue par la clientèle affaires</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 14 · CONCEPT V2 (planche d'intention) ===== -->
+<div class="ghc" id="s14" data-slide="14" data-label="Le concept retenu – Art déco parisien">
+<section class="slide s1">
+  <div class="big"><img src="assets/concept/c01.jpg" alt="Réception et lobby : comptoir en noyer cannelé et laiton, fauteuil en velours vert, appliques en verre strié"></div>
+  <div class="stack">
+    <figure><img src="assets/concept/c02.jpg" alt="Tête de lit en velours vert et applique en laiton"></figure>
+    <figure><img src="assets/concept/c03.jpg" alt="Photophore en verre strié sur une table en zellige vert"></figure>
+  </div>
+  <div class="text">
+    <h1>L'esprit<br><span class="sub">du concept</span></h1>
+    <p class="tagline">Le Paris des années folles,<br>entre les quais de gare et le faubourg.</p>
+    <div class="items">
+      <div class="item"><svg viewBox="0 0 48 60" aria-hidden="true"><path d="M4 58V24a20 20 0 0 1 40 0v34Z"/><path d="M15 46V28a9 9 0 0 1 18 0v18Z"/><path d="M19 46V30a5 5 0 0 1 10 0v16"/></svg><div><h3>Un art déco habité</h3><p>Une élégance géométrique, des matières nobles et chaleureuses, pour une atmosphère comme un appartement parisien, vécu et singulier.</p></div></div>
+      <div class="item"><svg viewBox="0 0 48 60" aria-hidden="true"><path d="M4 58V24a20 20 0 0 1 40 0v34Z"/><path d="M10 40a14 14 0 0 1 28 0Z"/><path d="M24 40 15 29M24 40 20 27M24 40 28 27M24 40 33 29M24 40V26"/></svg><div><h3>Une adresse du 10<sup>e</sup></h3><p>Entre Grands Boulevards, passages et cafés, le quartier inspire un art de vivre vibrant et théâtral, mélange d'effervescence et d'authenticité.</p></div></div>
+      <div class="item"><svg viewBox="0 0 48 60" aria-hidden="true"><path d="M4 58V24a20 20 0 0 1 40 0v34Z"/><path d="M24 20 33 36 24 52 15 36Z"/><path d="M24 26 29 36 24 46 19 36Z"/></svg><div><h3>Une modernité feutrée</h3><p>Un confort contemporain, des détails sur mesure et une attention portée à chaque usage, pour une expérience de boutique-hôtel intime et raffinée.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="interlude"><p>Dans un quartier de passage,<br>un endroit où l'on s'arrête.</p></div>
+
+<section class="slide s2">
+  <div>
+    <h1>Palette &amp;<br>matières</h1>
+    <p class="lead">Une palette chaleureuse, graphique et contemporaine. Des matières nobles et des textures subtiles composent une atmosphère élégante et intemporelle.</p>
+    <p class="tagline" style="margin:0 0 26px">Des couleurs qui enveloppent,<br>des matières qu'on a envie de toucher.</p>
+    <p class="label">Notre palette chromatique</p>
+    <div class="swatches">
+      <div><div class="chip" style="background:#1F3A2E"></div><p class="cap">Vert sapin</p></div>
+      <div><div class="chip" style="background:#1C2A45"></div><p class="cap">Bleu encre</p></div>
+      <div><div class="chip" style="background:#A9472A"></div><p class="cap">Terracotta</p></div>
+      <div><div class="chip" style="background:#5A1A22"></div><p class="cap">Bordeaux</p></div>
+    </div>
+    <p class="label">Nos matières</p>
+    <div class="mats">
+      <figure><img src="assets/concept/c04.jpg" alt="Noyer"><p class="cap">Noyer</p></figure>
+      <figure><img src="assets/concept/c05.jpg" alt="Velours vert"><p class="cap">Velours vert</p></figure>
+      <figure><img src="assets/concept/c06.jpg" alt="Velours bordeaux"><p class="cap">Velours bordeaux</p></figure>
+      <figure><img src="assets/concept/c07.jpg" alt="Laiton brossé"><p class="cap">Laiton brossé</p></figure>
+      <figure><img src="assets/concept/c08.jpg" alt="Zellige vert"><p class="cap">Zellige</p></figure>
+      <figure><img src="assets/concept/c09.jpg" alt="Verre strié"><p class="cap">Verre strié</p></figure>
+      <figure><img src="assets/concept/c10.jpg" alt="Tissu bouclé terracotta"><p class="cap">Bouclette terracotta</p></figure>
+      <figure><img src="assets/concept/c11.jpg" alt="Motif pied-de-poule"><p class="cap">Pied-de-poule</p></figure>
+    </div>
+  </div>
+  <div class="tall"><img src="assets/concept/c12.jpg" alt="Lobby : banquette en velours vert, guéridon en marbre et laiton, verre strié"></div>
+  <div class="duo">
+    <figure><img src="assets/concept/c13.jpg" alt="Planche de matières : noyer, zellige vert, verre strié, laiton brossé, velours bordeaux"></figure>
+    <figure><img src="assets/concept/c14.jpg" alt="Détail velours vert et verre strié"></figure>
+  </div>
+</section>
+
+<div class="interlude"><p>Le temps d'une nuit,<br>l'élégance d'un appartement parisien.</p></div>
+
+<section class="slide s3">
+  <figure style="margin:0"><div class="main"><img src="assets/concept/c15.jpg" alt="Vue générale de la chambre : tête de lit en velours vert, appliques globes en laiton, rideaux bordeaux, bureau en noyer"></div><figcaption>Vue générale</figcaption></figure>
+  <div class="text">
+    <h1>La chambre<br><span class="sub">Un cocon compact, raffiné<br>et parfaitement optimisé.</span></h1>
+    <p class="tagline">Refermer la porte : les quais s'éloignent,<br>le boulevard devient un murmure.</p>
+    <div class="grid">
+      <figure class="wide"><div class="ph"><img src="assets/concept/c16.jpg" alt="Détail de la tête de lit capitonnée et de l'applique"></div><figcaption>Détail tête de lit</figcaption></figure>
+      <figure><div class="ph"><img src="assets/concept/c17.jpg" alt="Bureau en noyer, lampe en laiton et rangements"></div><figcaption>Bureau &amp; rangement</figcaption></figure>
+      <figure><div class="ph"><img src="assets/concept/c18.jpg" alt="Salle d'eau : vasque en pierre, miroir arrondi et robinetterie laiton"></div><figcaption>Salle d'eau</figcaption></figure>
+    </div>
+  </div>
+</section>
+<div class="interlude"><p>À deux pas des quais,<br>une halte élégante, le temps d'un passage.</p></div>
+<p class="note">Visuels d'intention, non contractuels, destinés à faciliter la projection dans le futur hôtel.</p>
+</div>
+
+<!-- ===== 15 · HÔTEL LE CARDINAL ===== -->
+<section id="s15" data-slide="15">
+  <div class="container">
+    <h2 class="section-title">Exemple d’un repositionnement réussi : <em>Hôtel le Cardinal</em></h2>
+    <div class="keylearning"><p>Un établissement 3* repositionné en 4*, réouvert en 2025.</p></div>
+    <div class="grid-2 even align-center">
+      <div class="card">
+        <ul class="list-clean">
+          <li>Hôtel 3 étoiles de 77 chambres acquis en décembre 2022 — passage à 80 chambres d'une surface moyenne de 14,7 m² (de 8 à 23 m²) </li>
+          <li>Repositionnement en 4 étoiles après plusieurs mois et 4,5 M€ de travaux</li>
+          <li>Création de 3 chambres sans création de surface, réagencement du RDC et création d’une salle immersive</li>
+          <li>Fermeture totale 4 mois en 2025, puis ouverture progressive par étage</li>
+          <li>Stabilisé en 2026 avec un RevPAR TTC de 180 € (YTD 2026)</li>
+          <li>Depuis sa réouverture, l’hôtel affiche une e-réputation moyenne de 90/100</li>
+        </ul>
+      </div>
+      <div class="gallery" id="cardinalGallery" aria-roledescription="carrousel">
+        <div class="gallery-track">
+          <figure class="gslide"><img src="assets/img/s15_7.jpg" alt="Hôtel le Cardinal — photo 1"></figure>
+          <figure class="gslide"><img src="assets/img/s15_11.jpg" alt="Hôtel le Cardinal — photo 2"></figure>
+          <figure class="gslide"><img src="assets/img/s15_17.jpg" alt="Hôtel le Cardinal — photo 3"></figure>
+          <figure class="gslide"><img src="assets/img/s15_21.jpg" alt="Hôtel le Cardinal — photo 4"></figure>
+          <figure class="gslide"><img src="assets/img/s15_19.jpg" alt="Hôtel le Cardinal — photo 5"></figure>
+          <figure class="gslide"><img src="assets/img/s15_23.jpg" alt="Hôtel le Cardinal — photo 6"></figure>
+        </div>
+        <button class="gnav prev" type="button" aria-label="Photo précédente" data-chrome>‹</button>
+        <button class="gnav next" type="button" aria-label="Photo suivante" data-chrome>›</button>
+        <div class="gdots" data-chrome></div>
+        <div class="gthumbs" data-chrome></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 16 · SECTION : LES CARACTÉRISTIQUES ===== -->
+<section id="s16" data-slide="16" class="divider-section">
+  <div class="container">
+    <h2>Les caractéristiques du <em>Projet Grand Hôtel de Paris</em></h2>
+    <p>Capacité cible, room-mix, espaces communs et articulation des espaces : la traduction opérationnelle du concept.</p>
+  </div>
+</section>
+
+<!-- ===== 17 · LA CAPACITÉ CIBLE ===== -->
+<section id="s17" data-slide="17" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">La capacité <em>cible</em></h2>
+    <div class="keylearning"><p>50 clés : le maximum permis à la fois par le bâtiment et par la réglementation 4*.</p></div>
+    <div class="grid-3">
+      <div class="card">
+        <h4 class="mini">Une capacité légèrement supérieure à la moyenne du Compset</h4>
+        <p>Avec 50 chambres, le Grand Hôtel de Paris se situe au-dessus de la moyenne des quatre concurrents directs (46,8 chambres), tout en restant dans leur fourchette de capacité, comprise entre 42 et 53 chambres.</p>
+        <ul class="list-clean tight">
+          <li>Un format cohérent avec l’environnement concurrentiel local.</li>
+          <li>Coûts fixes répartis sur plus de chambres que des concurrents comme les hôtels Flanelles (44), Littéraire Arthur Rimbaud (42) ou 9Hotel République (48).</li>
+          <li>Une capacité permettant d’adresser plusieurs segments de clientèle.</li>
+          <li>Un positionnement tarifaire compétitif pour accompagner la montée en puissance commerciale.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="mini">Un cœur d’offre structurant, complété par des catégories ciblées</h4>
+        <ul class="list-clean tight">
+          <li>Les 31 chambres Classiques et Supérieures représentent 62 % du parc et constituent le socle de commercialisation.</li>
+          <li>13 chambres individuelles, dont 6 mansardées, pour les voyageurs seuls.</li>
+          <li>5 chambres Triples et 1 Familiale pour accueillir familles et petits groupes.</li>
+          <li>Une diversité de catégories permettant de moduler les prix selon la capacité, le confort et les caractéristiques des chambres.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="mini">50 clés : un plafond réglementaire à ne pas dépasser</h4>
+        <p>Au-delà, deux obligations se déclenchent dès la 51ᵉ clé :</p>
+        <ul class="list-clean tight">
+          <li>un monte-charge ou un deuxième ascenseur devient obligatoire en 4* à partir de 51 chambres (critère 155).</li>
+          <li>une <strong>troisième chambre PMR</strong>, puisque la règle prévoit 2 chambres adaptées jusqu’à 50.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 23 · RDC ET ESPACES COMMUNS ===== -->
+<section id="s23" data-slide="23">
+  <div class="container">
+    <h2 class="section-title">Le RDC et les <em>espaces communs</em></h2>
+    <div class="keylearning"><p><strong><em>Hypothèses fondées sur l’exploitation des deux commerces en RDC</em></strong></p><p>Les étages comptent plusieurs chambres sous les minima de surface 4*. Les espaces communs doivent donc compenser par des points à la carte.</p></div>
+    <div class="ffr">
+      <div class="ffr-col forces"><h4>Forces</h4><ul>
+        <li><strong>Angle de rue : </strong>deux façades et forte visibilité près de la gare de l’Est, idéal pour un coffee-shop ouvert sur la ville.</li>
+        <li><strong>Office existant (9,4 m²) : </strong>contigu à l’angle, relié à la réserve cuisine du SS1 par l’escalier de service.</li>
+        <li><strong>Surfaces : </strong>le total des communs atteindrait plus de 200 m carrés. Les 70 m² d’espaces communs exigés en 4* sont largement dépassés.</li>
+        <li><strong>Hauteur : </strong>environ 3,3 m sous plafond dans la zone d’angle, un volume généreux pour le lounge.</li>
+        <li><strong>Zone sud : </strong>façade sur le boulevard et lumière naturelle, adaptée à une salle de réunion.</li>
+      </ul></div>
+      <div class="ffr-col faiblesses"><h4>Faiblesses</h4><ul>
+        <li><strong>Cœur hôtelier étroit : </strong>SAS, hall et réception en bande entre les deux zones ; check-in, petit-déjeuner et bagages convergent vers le desk.</li>
+        <li><strong>Ancienne salle petit-déjeuner : </strong>sans façade, réservée à des fonctions sans lumière naturelle.</li>
+      </ul></div>
+      <div class="ffr-col reco"><h4>Recommandations</h4><ul>
+        <li><strong>Angle (≈ 80 m²) : </strong>café et petit-déjeuner modulable offrant environ 35 places assises</li>
+        <li><strong>Office agrandi (≈ 12 m²) : </strong>un seul point de production pour le petit-déjeuner et le bar.</li>
+        <li><strong>Réception : </strong>desk recentré, ouvert sur le lounge, back-office de ≈ 8 m² derrière.</li>
+        <li><strong>Zone sud : </strong>fitness </li>
+        <li><strong>Ancienne salle petit-déjeuner : </strong>sanitaires H/F dont PMR, bagagerie sécurisée et réserve bar (≈ 8 m² chacun).</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 24 · BACK-OF-HOUSE ===== -->
+<section id="s24" data-slide="24" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Le back-of-house <em>et les flux</em></h2>
+    <div class="keylearning"><p>Un SS1 dédié au BoH, à recomposer pour le Code du travail et à organiser autour d'un ascenseur unique.</p></div>
+    <div class="ffr">
+      <div class="ffr-col forces"><h4>Forces</h4><ul>
+        <li><strong>Le SS1 est entièrement BoH : </strong>lingerie de 7 m², environ 21 m² de réserves, vestiaires et local déchets de 7,9 m², desservis par l’ascenseur et l’escalier de service.</li>
+      </ul></div>
+      <div class="ffr-col faiblesses"><h4>Faiblesses</h4><ul>
+        <li><strong>Un seul ascenseur </strong>pour tous les flux : clients, linge, petit-déjeuner et déchets.</li>
+        <li><strong>Code du travail : </strong>un seul vestiaire de 5,9 m², non séparé hommes/femmes ; ni local de pause, ni WC du personnel au SS1.</li>
+        <li><strong>Réserve 2 : </strong>1,57 m de hauteur sous plafond seulement.</li>
+      </ul></div>
+      <div class="ffr-col reco"><h4>Recommandations</h4><ul>
+        <li><strong>Recomposer le SS1 : </strong>vestiaires hommes et femmes séparés, salle de pause à la place de la réserve de 7,3 m², WC du personnel. Si la cave du commerce est reprise, y loger la réserve bar et les stocks.</li>
+        <li><strong>Planifier les flux de l’ascenseur : </strong>rapprocher la lingerie de l’ascenseur</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+<!-- ===== 25 · SECTION : PRÉVISIONS D'EXPLOITATION ===== -->
+<section id="s25" data-slide="25" class="divider-section">
+  <div class="container">
+    <h2>Les prévisions <em>d’exploitation</em></h2>
+    <p>Positionnement tarifaire, performances comparées au Compset, topline normalisée et projections 2029-2033.</p>
+  </div>
+</section>
+
+<!-- ===== 26-27 · COMPSET MKG ===== -->
+<section id="s26" data-slide="26" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Compset <em>MKG</em></h2>
+    <div class="keylearning"><p>Un panel représentatif de l’environnement concurrentiel.</p></div>
+    <div class="grid-2 even">
+      <div class="card"><h4 class="mini">Objectif</h4>
+        <p>Constituer un Competitive set cohérent et représentatif afin de mesurer objectivement les performances futures de l'hôtel via les indicateurs MKG (Occupation, ADR et RevPAR Index). Le panel sélectionné reflète fidèlement l'environnement concurrentiel direct de l'actif et constitue une base robuste pour le suivi des performances MKG après repositionnement.</p></div>
+      <div>
+        <p>Le Projet Grand Hôtel de Paris se positionne à la croisée de l’Hôtel Mademoiselle pour sa capacité et du 9Hotel République et de l’Hôtel Flanelles pour le niveau de qualité visé.</p>
+        <p>Avec 26 % de chambres d’entrée de gamme et 62 % de chambres de 15 à 18,9 m², son inventaire offre une profondeur de gamme permettant de combiner accessibilité tarifaire et valorisation du cœur d’offre. Ses surfaces constituent un avantage concurrentiel face aux établissements les plus compacts du panel.</p>
+        <p>La faible proportion de grandes chambres limite toutefois le potentiel de montée en gamme par la surface. La valorisation du prix moyen devra donc s’appuyer sur la qualité des aménagements, les prestations et l’expérience client.</p>
+      </div>
+    </div>
+    <div id="s27" class="vision-lead" style="margin-top:30px">
+      <p class="lead-strong">Un positionnement 4*, aligné sur la concurrence locale, avec une ambition de différenciation par l’expérience client et une e-réputation cible supérieure au panel.</p>
+      <div class="table-wrap"><table class="compact">
+        <thead><tr><th>HOTEL</th><th>DISTANCE DU PROJET</th><th>POSITIONNEMENT</th><th>CAPACITE</th><th>DERNIERE RENOVATION</th><th>NOTE BOOKING</th><th>BAR MOYEN € 2026</th><th>SERVICES</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Hôtel Mademoiselle Paris</td><td>400 m</td><td class="stars">★★★★</td><td>53</td><td>2013</td><td>8,3</td><td>220</td><td class="wrap">Bar, Spa, hammam, sauna, fitness, terrasse, salle de réunion, room service, massage</td></tr>
+          <tr><td class="k">Littéraire Arthur Rimbaud</td><td>550 m</td><td class="stars">★★★★</td><td>42</td><td>2024<br>(complète)</td><td>8,3</td><td>238</td><td class="wrap">Bar, room service</td></tr>
+          <tr><td class="k">9Hotel République</td><td>600 m</td><td class="stars">★★★★</td><td>48</td><td>2015<br>(complète)</td><td>8,8</td><td>237</td><td class="wrap">Bar, fitness</td></tr>
+          <tr><td class="k">Hôtel Flanelles Paris</td><td>600 m</td><td class="stars">★★★★</td><td>44</td><td>2023<br>(complète)</td><td>8,5</td><td>247</td><td class="wrap">Bar, terrasse, room service</td></tr>
+        </tbody></table></div>
+      <div class="table-wrap" style="margin-top:18px"><table class="mid compact">
+        <thead><tr><th>CRITÈRES</th><th>PROJET</th><th>COMPSET (MOYENNE)</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Localisation immédiate</td><td><span class="check">✔</span></td><td><span class="check">✔</span></td></tr>
+          <tr><td class="k">4 étoiles</td><td><span class="check">✔</span></td><td><span class="check">✔</span></td></tr>
+          <tr><td class="k">42–53 chambres</td><td><span class="check">✔</span></td><td><span class="check">✔</span></td></tr>
+          <tr><td class="k">Rénovation récente</td><td><span class="check">✔</span></td><td>50% du Compset</td></tr>
+          <tr><td class="k">Surface moyenne chambres</td><td><span class="check">✔</span></td><td><span class="check">✔</span></td></tr>
+          <tr><td class="k">E-Réputation &gt; 8</td><td>Cible &gt; 8,8</td><td><span class="check">✔</span></td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 28 · PERFORMANCES DU COMPSET ===== -->
+<section id="s28" data-slide="28">
+  <div class="container">
+    <h2 class="section-title">Performances commerciales du <em>Compset MKG en 2025</em></h2>
+    <div class="keylearning"><p>Le projet Grand Hotel de Paris peut viser une performance supérieure au Compset grâce à une stratégie combinant un fort taux d’occupation et une valorisation maîtrisée du prix moyen sur la haute saison.</p></div>
+    <div class="grid-2 wide-right">
+      <div class="card">
+        <h4 class="mini">Points clés </h4>
+        <p>Nous optons pour une stratégie d’équilibre entre volume et valeur : un taux d’occupation aligné sur le modèle de volume de l’Hôtel Opera Liège et un prix moyen proche de celui du Compset intermédiaire. </p>
+        <p>Avec un TO normalisé de 90 % et un PM de 187 € TTC, le Projet Grand Hotel de Paris atteindrait un RevPAR de 168 € TTC supérieur de 2,3 % à celui du Compset MKG établi à 164 € TTC.</p>
+      </div>
+      <div class="chart-box"><h4>Topline Normalisée projet Grand Hotel de Paris 2025 vs Compset MKG 2025</h4><div class="chart-canvas-wrap tall"><canvas id="ch28" aria-label="TO % Projet et TO Compset MKG par mois"></canvas></div><div class="lg" id="ch28-legend"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 31 · TOPLINE NORMALISÉE 2025 ===== -->
+<section id="s31" data-slide="31" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Topline normalisée 2025 <em>: Pleine pénétration du marché</em></h2>
+    <div class="keylearning"><p>Projections annuelles.</p></div>
+    <div class="table-wrap"><table class="num-right compact topline">
+      <thead><tr><th>KPIs Normalisé 2025</th><th>Hôtel 2025</th><th>Compset MKG</th><th>vs</th></tr></thead>
+      <tbody>
+        <tr><td class="k">TO %</td><td>90 %</td><td>83 %</td><td class="var-pos">+7 pts</td></tr>
+        <tr><td class="k">PM € TTC</td><td>187 €</td><td>197 €</td><td class="var-neg">-5 %</td></tr>
+        <tr class="sumrow boldrow"><td class="k">RevPAR € TTC</td><td>168 €</td><td>164 €</td><td class="var-pos">+2,3 %</td></tr>
+      </tbody></table></div>
+    <div class="card" style="margin-top:22px">
+      <p>La Topline repose sur une approche mensuelle combinant le niveau de marché et la performance opérationnelle de l’Hôtel Opéra Liège, comparable Oversight pertinent en matière de capacité et de stratégie de remplissage.</p>
+      <h4 class="mini">Construction du normalisé 2025</h4>
+      <ul class="list-clean tight">
+        <li>Le compset MKG constitue la référence de marché. </li>
+        <li>Le TO est obtenu en appliquant le MPI de l’Hôtel Opéra Liège (48 chambres) au TO du Compset soit une simulation de l’hôtel rénové sous notre exploitation, avec un MPI<strong>*</strong> de <strong>108</strong>.</li>
+        <li>Le PM est construit à partir d’un ARI<strong>*</strong> cible de <strong>95</strong>, cohérent avec le produit milieu de gamme prévu et le positionnement tarifaire proches des concurrents directs à moindre services Flanelles et du 9Hotel République.</li>
+        <li>Le calcul mensuel préserve la saisonnalité réelle du marché. </li>
+      </ul>
+      <p class="small-note"><strong><em>*MPI (Market Penetration Index)</em></strong><em> : compare le taux d’occupation de l’hôtel à celui du compset ; </em><strong><em>108 signifie une occupation supérieure de 8 %</em></strong><em>.</em><br><strong><em>*ARI (Average Rate Index)</em></strong><em> : compare le prix moyen de l’hôtel à celui du compset ; </em><strong><em>95 signifie un prix moyen inférieur de 5 %</em></strong><em>.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 32 · TOPLINE 2029-2030 ===== -->
+<section id="s32" data-slide="32">
+  <div class="container">
+    <h2 class="section-title">Topline 2029-2030 <em>: du niveau de marché à la pleine pénétration</em></h2>
+    <div class="keylearning"><p>Projections annuelles.</p></div>
+    <div class="table-wrap"><table class="num-right compact topline">
+      <thead><tr><th>Topline 2029 – 2030</th><th>Hôtel 2029</th><th>Hôtel 2030</th><th>vs</th></tr></thead>
+      <tbody>
+        <tr><td class="k">TO %</td><td>83 %</td><td>90 %</td><td class="var-pos">+7 pts</td></tr>
+        <tr><td class="k">PM € TTC</td><td>201 €</td><td>205 €</td><td class="var-pos">+2 %</td></tr>
+        <tr class="sumrow boldrow"><td class="k">RevPAR € TTC</td><td>167 €</td><td>184 €</td><td class="var-pos">+10 %</td></tr>
+      </tbody></table></div>
+    <div class="grid-2 even" style="margin-top:22px">
+      <div class="card">
+        <h4 class="mini">Ramp-up 2029 - Installation sur le marché </h4>
+        <p><strong>Ouverture en 2029 :</strong> hypothèse d’occupation au niveau du marché (MPI de 100), avec un prix moyen normalisé revalorisé de l’inflation cumulée depuis 2025.</p>
+        <ul class="list-clean tight">
+          <li>Pour l’année d’ouverture, le projet Grand Hôtel de Paris est calibré sur <strong>un MPI mensuel de 100</strong></li>
+          <li>Le taux d’occupation est en ligne avec le niveau de remplissage du compset MKG </li>
+          <li>Le prix moyen est obtenu à partir du prix moyen normalisé 2025, revalorisé de l’inflation annuelle entre 2025 et 2029</li>
+          <li>Prix préservé dès l’ouverture grâce aux qualités intrinsèques du produit</li>
+          <li>Le ramp-up conduit à un <strong>CA hébergement de 2,7 M € HT</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="mini">Stabilisé 2030 - Pleine pénétration </h4>
+        <p><strong>Stabilisation dès 2030 :</strong> retour au niveau d’occupation normalisé (<strong>MPI de 108</strong>), puis croissance du prix moyen selon l’inflation annuelle jusqu’en 2033.</p>
+        <ul class="list-clean tight">
+          <li>Plein effet de la <strong>notoriété</strong>, de la <strong>distribution</strong> et du <strong>modèle de gestion</strong> </li>
+          <li>L’année stabilisée atteint ainsi <strong>3 M €  de CA hébergement HT</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 33 · MARGE D'EXPLOITATION 2030 ===== -->
+<section id="s33" data-slide="33" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Détails de la marge d’exploitation — <em>année stabilisée 2030</em></h2>
+    <p class="small-note" style="margin:0 0 8px">Projet Grand Hôtel de Paris · Output · Exprimé en k €</p>
+    <div class="stats-row two" style="max-width:640px;margin-bottom:18px">
+      <div class="stat-card"><div class="num">50</div><div class="label"># chambres construites</div></div>
+      <div class="stat-card"><div class="num">16 367</div><div class="label"># chambres vendues</div></div>
+    </div>
+    <div class="table-wrap"><table class="pl-table pl6"><thead><tr><th></th>
+      <th>GHP Normalisé 2025<span class="yr">En k€</span></th><th>GHP Stabilisé 2030<span class="yr">En k€</span></th>
+      <th>Drivers</th><th>GHP Stabilisé 2030</th><th>Commentaires</th></tr></thead><tbody>
+<tr class="sumrow boldrow"><td class="k">Chiffre d&#x27;affaires total</td><td>2 919</td><td>3 200</td><td></td><td></td><td class="cmt">Stabilisation de l&#x27;activité en 2030 portée par un TO à 90% et un prix moyen à 205€ TTC</td></tr>
+<tr class="boldrow"><td class="k">Frais de Personnel</td><td>(748)</td><td>(820)</td><td>% du CA HT</td><td>-25,6%</td><td class="cmt">Frais de personnel comprenant une direction à 3 officers et un HSK internalisé avec un total de 20 ETP</td></tr>
+<tr class="boldrow"><td class="k">Sales &amp; Marketing</td><td>(269)</td><td>(272)</td><td>% du CA HT</td><td>-8,5%</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">Commissions</td><td>(248)</td><td>(251)</td><td>% CA hébergement</td><td>-8,2%</td><td class="cmt">Commissions OTA établis sur la base d&#x27;un hôtel ayant une segmentation loisirs et corporate</td></tr>
+<tr class=""><td class="k">Frais de marketing</td><td>(21)</td><td>(21)</td><td>€/mois</td><td>(1 751)</td><td class="cmt">Stratégie de lancement pour l&#x27;ouverture de l&#x27;établissement et maintient de projets marketing</td></tr>
+<tr class="boldrow"><td class="k">Charges Directes (I)</td><td>(217)</td><td>(250)</td><td>% du CA HT</td><td>-7,8%</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">Charges Directes Fixes</td><td>(26)</td><td>(30)</td><td>€/mois</td><td>(2 490)</td><td class="cmt">Les charges directes fixes comprennent les différents contrats de location de l&#x27;hôtel (exemples : machines à café, wifi, TPE etc)</td></tr>
+<tr class=""><td class="k">Charges Directes Variables</td><td>(191)</td><td>(220)</td><td>€/chambre vendue</td><td>13,5</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">→ dont Blanchisserie</td><td>(75)</td><td>(86)</td><td>€/chambre vendue</td><td>(5,3)</td><td class="cmt">Choix de linge de gamme 4 étoiles</td></tr>
+<tr class=""><td class="k">→ Fourniture Consommable</td><td>(16)</td><td>(18)</td><td>€/chambre vendue</td><td>(1,1)</td><td class="cmt">Expérience client renforcée avec des produits d&#x27;accueil d&#x27;un standing 4 étoiles</td></tr>
+<tr class=""><td class="k">→ Achat - Matière première</td><td>(84)</td><td>(97)</td><td>€/chambre vendue</td><td>(5,9)</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">→ Autres Charges Directes Variables</td><td>(16)</td><td>(19)</td><td>% CA hébergement</td><td>-0,6%</td><td class="cmt">Les charges variables correspondent à la sous traitance à laquelle peut faire appel l&#x27;hôtel (débours, pressing délogement)</td></tr>
+<tr class="boldrow"><td class="k">General &amp; Administration (II)</td><td>(104)</td><td>(120)</td><td>% du CA HT</td><td>-3,8%</td><td class="cmt">Sont compris dans les G&amp;A les frais sur TPE, contrats opérationnels de l&#x27;hôtel (PMS, channel manager, RMS, caisse, planning etc)</td></tr>
+<tr class="boldrow"><td class="k">Autres charges opérationnelles (III)</td><td>(130)</td><td>(151)</td><td>% du CA HT</td><td>-4,7%</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">Energie</td><td>(57)</td><td>(66)</td><td>€/chambre vendue</td><td>4,0</td><td class="cmt">Coût moyen par chambre relativement faible par rapport aux autres comparables au vu de la taille de l&#x27;établissement</td></tr>
+<tr class=""><td class="k">Taxes Opérationelles</td><td>(40)</td><td>(46)</td><td>€/mois</td><td>(3 835)</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">Maintenance</td><td>(33)</td><td>(38)</td><td>€/mois</td><td>(3 201)</td><td class="cmt">Contrats de maintenance plus élevés du à l&#x27;inflation</td></tr>
+<tr class="boldrow"><td class="k">Charges Opérationelles (I+II+III)</td><td>(451)</td><td>(521)</td><td>% du CA HT</td><td>-16,3%</td><td class="cmt"></td></tr>
+<tr class="sumrow boldrow"><td class="k">Profit Operationel &quot;GOP&quot;</td><td>1 451</td><td>1 587</td><td>% du CA HT</td><td>49,6%</td><td class="cmt">GOP en ligne avec des hôtels similaires accompagnés par Oversight</td></tr>
+<tr class="boldrow"><td class="k">Charges Hors Exploitation</td><td>(237)</td><td>(259)</td><td>% du CA HT</td><td>-8,1%</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">Assurance</td><td>(6)</td><td>(7)</td><td>€/mois</td><td>(578)</td><td class="cmt"></td></tr>
+<tr class=""><td class="k">Coûts de Structure et Honoraires</td><td>(211)</td><td>(231)</td><td>€/mois</td><td>(19 214)</td><td class="cmt">Considère les honoraires de management, comptable et juridiques<br>Les honoraires de management proposés sont basés sur un calcul de 2% du CA et 8% du GOP</td></tr>
+<tr class=""><td class="k">Autres Charges Hors Exploitation</td><td>(20)</td><td>(22)</td><td>€/mois</td><td>(1 811)</td><td class="cmt">Comprend notamment la taxe foncière</td></tr>
+<tr class="sumrow boldrow"><td class="k">EBE</td><td>1 214</td><td>1 328</td><td>% du CA HT</td><td>41,5%</td><td class="cmt"></td></tr>
+</tbody></table></div>
+  </div>
+</section>
+
+<!-- ===== 34 · BUSINESS PLAN ===== -->
+<section id="s34" data-slide="34">
+  <div class="container">
+    <h2 class="section-title">Business Plan <em>de 2029 à 2033 </em></h2>
+    <p class="small-note" style="margin:0 0 14px">Projet Grand Hôtel de Paris · Business Plan Simplifié 4 étoiles · Exprimé en Ke</p>
+    <h4 class="sub bp-h">0. Hypothèses de Cash Flow</h4>
+    <div class="table-wrap cf-full"><table class="num-right cf-table bp">
+<thead><tr class="yr-row"><th rowspan="2"></th><th>2025</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th><th>2031</th><th>2032</th><th>2033</th></tr><tr class="sub-row"><th>Normalisé</th><th>Acquisition</th><th>Travaux</th><th>Travaux</th><th>Ramp Up</th><th>Stabilisé</th><th></th><th></th><th></th></tr></thead>
+<tbody>
+<tr class=""><td class="k">#room</td><td></td><td>50</td><td>50</td><td>50</td><td>50</td><td>50</td><td>50</td><td>50</td><td>50</td></tr>
+<tr class=""><td class="k">Croissance du PM</td><td></td><td>0,0%</td><td>0,0%</td><td>0,0%</td><td>0,0%</td><td>2,5%</td><td>2,5%</td><td>2,5%</td><td>2,5%</td></tr>
+<tr class=""><td class="k">Inflation</td><td></td><td>1,94%</td><td>1,76%</td><td>1,83%</td><td>1,80%</td><td>1,95%</td><td>1,97%</td><td>1,99%</td><td>2,01%</td></tr>
+<tr class=""><td class="k">% recette d&#x27;hebergement</td><td></td><td>0%</td><td>0%</td><td>0%</td><td>95,4%</td><td>95,4%</td><td>95,4%</td><td>95,4%</td><td>95,4%</td></tr>
+<tr class=""><td class="k">Taux d&#x27;ouverture</td><td></td><td>0%</td><td>0%</td><td>0%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+<tr class=""><td class="k">Taux d&#x27;occupation</td><td></td><td>0%</td><td>0%</td><td>0%</td><td>83%</td><td>90%</td><td>90%</td><td>90%</td><td>90%</td></tr>
+<tr class=""><td class="k">PM TTC (en €)</td><td></td><td>0</td><td>0</td><td>0</td><td>201</td><td>205</td><td>210</td><td>216</td><td>221</td></tr>
+<tr class=""><td class="k">RevPar TTC (en €)</td><td></td><td>0</td><td>0</td><td>0</td><td>168</td><td>184</td><td>189</td><td>193</td><td>198</td></tr>
+</tbody></table></div>
+    <h4 class="sub bp-h" style="margin-top:26px">1. Cash Flow Hôtel  (k€ HT)</h4>
+    <div class="table-wrap cf-full"><table class="num-right cf-table bp">
+<thead><tr class="yr-row"><th rowspan="2"></th><th>2025</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th><th>2031</th><th>2032</th><th>2033</th><th>Total</th></tr><tr class="sub-row"><th>Normalisé</th><th>Acquisition</th><th>Travaux</th><th>Travaux</th><th>Ramp Up</th><th>Stabilisé</th><th></th><th></th><th></th><th></th></tr></thead>
+<tbody>
+<tr class=""><td class="k">Recettes hébergement</td><td>2 786</td><td>-</td><td>-</td><td>-</td><td>2 780</td><td>3 054</td><td>3 130</td><td>3 209</td><td>3 289</td><td>18 833</td></tr>
+<tr class=""><td class="k">Autres recettes</td><td>133</td><td>-</td><td>-</td><td>-</td><td>133</td><td>146</td><td>149</td><td>153</td><td>157</td><td>899</td></tr>
+<tr class="sumrow boldrow"><td class="k">Total Revenue</td><td>2 919</td><td>-</td><td>-</td><td>-</td><td>2 913</td><td>3 200</td><td>3 280</td><td>3 362</td><td>3 446</td><td>19 732</td></tr>
+<tr class=""><td class="k">Frais de Personnel</td><td>(748)</td><td></td><td></td><td></td><td>(804)</td><td>(820)</td><td>(836)</td><td>(853)</td><td>(870)</td><td></td></tr>
+<tr class=""><td class="k">Sales &amp; Marketing</td><td>(268)</td><td>-</td><td>-</td><td>-</td><td>(267)</td><td>(272)</td><td>(279)</td><td>(286)</td><td>(293)</td><td></td></tr>
+<tr class=""><td class="k">Charges Opérationnelles</td><td>(454)</td><td>-</td><td>-</td><td>-</td><td>(488)</td><td>(521)</td><td>(533)</td><td>(545)</td><td>(558)</td><td></td></tr>
+<tr class="sumrow boldrow"><td class="k">Gross Operating Profit (GOP)</td><td>1 449</td><td>-</td><td>-</td><td>-</td><td>1 353</td><td>1 587</td><td>1 632</td><td>1 678</td><td>1 726</td><td>9 726</td></tr>
+<tr class="marge"><td class="k">marge de GOP</td><td></td><td></td><td></td><td></td><td>46,5%</td><td>49,6%</td><td>49,8%</td><td>49,9%</td><td>50,1%</td><td></td></tr>
+<tr class=""><td class="k">Assurance</td><td>(6)</td><td>-</td><td>-</td><td>-</td><td>(7)</td><td>(7)</td><td>(7)</td><td>(7)</td><td>(7)</td><td></td></tr>
+<tr class=""><td class="k">Honoraires de Management</td><td>(174)</td><td>-</td><td>-</td><td>-</td><td>(166)</td><td>(191)</td><td>(196)</td><td>(202)</td><td>(207)</td><td></td></tr>
+<tr class=""><td class="k">Autres Honoraires</td><td>(36)</td><td>-</td><td>-</td><td>-</td><td>(39)</td><td>(40)</td><td>(40)</td><td>(41)</td><td>(42)</td><td></td></tr>
+<tr class=""><td class="k">Autres Charges Hors Exploitation</td><td>(20)</td><td>-</td><td>-</td><td>-</td><td>(21)</td><td>(22)</td><td>(22)</td><td>(23)</td><td>(23)</td><td></td></tr>
+<tr class="sumrow boldrow"><td class="k">EBE</td><td>1 213</td><td>-</td><td>-</td><td>-</td><td>1 120</td><td>1 328</td><td>1 366</td><td>1 406</td><td>1 446</td><td>8 342</td></tr>
+<tr class="marge"><td class="k">marge d&#x27;EBE</td><td>41,5%</td><td></td><td></td><td></td><td>38,4%</td><td>41,5%</td><td>41,7%</td><td>41,8%</td><td>42,0%</td><td></td></tr>
+</tbody></table></div>
+  </div>
+</section>
+<!-- ===== 35 · SECTION : LE MODÈLE OVERSIGHT ===== -->
+<section id="s35" data-slide="35" class="divider-section">
+  <div class="container">
+    <h2>Le modèle <em>Oversight</em></h2>
+    <p>Notre équipe réunit des experts de l’hôtellerie, alliant une solide expérience du secteur à une maîtrise des nouvelles technologies, avec une ambition commune : optimiser durablement la performance des actifs que nous accompagnons.</p>
+  </div>
+</section>
+
+<!-- ===== 36 · INNOVER ===== -->
+<section id="s36" data-slide="36" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Innover pour <em>transformer durablement</em></h2>
+    <div class="keylearning"><p>Depuis 2018, une même conviction : innover au service de la performance des hôtels.</p></div>
+    <div class="vision-block">
+      <h3 class="vision-q">« Il faut innover pour prospérer ».</h3>
+      <p>C’est sur cette conviction qu’Oversight a vu le jour en 2018. Innover, c’est donner aux hôteliers les moyens de voir plus loin.</p>
+      <p>Oversight allie expertise hôtelière, culture digitale et intelligence de la donnée pour transformer la gestion en levier de croissance. Entre esprit entrepreneurial, créativité et engagement, nous avançons aux côtés de nos clients pour repenser les modèles d’aujourd’hui et construire l’hôtellerie indépendante de demain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 40 · ACCOMPAGNEMENT CONTINU (frise) ===== -->
+<section id="s40" data-slide="40">
+  <div class="container">
+    <h2 class="section-title">L’accompagnement continu <em>d’Oversight</em></h2>
+    <div class="keylearning"><p>Notre modèle couvre toute la vie de l’actif.</p></div>
+    <p class="click-hint" data-chrome>Cliquez sur chaque étape pour en découvrir le détail.</p>
+    <div class="timeline" id="timeline">
+      <div class="tl-track" role="tablist" aria-label="Étapes de l’accompagnement">
+        <button class="tl-step on" role="tab" aria-selected="true" aria-controls="tl-p1" id="tl-t1" type="button"><span class="tl-dot" data-chrome>1</span><span class="tl-name">Conception</span></button>
+        <button class="tl-step" role="tab" aria-selected="false" aria-controls="tl-p2" id="tl-t2" type="button"><span class="tl-dot" data-chrome>2</span><span class="tl-name">Onboarding</span></button>
+        <button class="tl-step" role="tab" aria-selected="false" aria-controls="tl-p3" id="tl-t3" type="button"><span class="tl-dot" data-chrome>3</span><span class="tl-name">Exploitation</span></button>
+        <button class="tl-step" role="tab" aria-selected="false" aria-controls="tl-p4" id="tl-t4" type="button"><span class="tl-dot" data-chrome>4</span><span class="tl-name">Sortie</span></button>
+      </div>
+      <div class="tl-panels">
+        <div class="tl-panel on" role="tabpanel" id="tl-p1" aria-labelledby="tl-t1">
+          <h4 class="tl-print-title" data-chrome>Conception</h4>
+          <p class="tl-lead">Avant les travaux : cadrer le projet et sécuriser les choix qui engagent l’exploitation</p>
+          <ul class="tl-items"><li>Business Plan</li><li>Revue opérationnelle des plans</li><li>Coordination prestataires</li><li>Stratégie pré-opening</li></ul>
+        </div>
+        <div class="tl-panel" role="tabpanel" id="tl-p2" aria-labelledby="tl-t2">
+          <h4 class="tl-print-title" data-chrome>Onboarding</h4>
+          <p class="tl-lead">Avant l’ouverture, structurer l’exploitation</p>
+          <ul class="tl-items"><li>Construction et formation des équipes</li><li>Procédures opérationnelles</li><li>Commercialisation</li><li>Outils &amp; automatisations</li></ul>
+        </div>
+        <div class="tl-panel" role="tabpanel" id="tl-p3" aria-labelledby="tl-t3">
+          <h4 class="tl-print-title" data-chrome>Exploitation</h4>
+          <p class="tl-lead">Un modèle centré sur l’humain et boosté par l’IA qui maîtrise les risques et saisit les opportunités</p>
+          <ul class="tl-items"><li>3 co-dirigeants</li><li>1 écosystème tech</li><li>Data first</li><li class="wide">1 accompagnement 360° par notre équipe de Consultants spécialistes : Contrôle de gestion, Ressources humaines, Réglementaire, Commercial, Marketing, Organisation, Knowledge</li></ul>
+        </div>
+        <div class="tl-panel" role="tabpanel" id="tl-p4" aria-labelledby="tl-t4">
+          <h4 class="tl-print-title" data-chrome>Sortie</h4>
+          <p class="tl-lead">À tout moment, vous reprenez la main</p>
+          <ul class="tl-items"><li class="wide">Sortie flexible (préavis de 4 mois sans indemnités dans le cas d’une cession du fonds de commerce)</li><li class="wide">L’hôtel conserve ses datas, ses équipes, son savoir-faire</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="guarantee">
+      <span class="g-label">Une garantie pour le propriétaire :</span>
+      <span class="g-val">transparence et performance</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 41 · NOS DIFFÉRENTS CONTRATS ===== -->
+<section id="s41" data-slide="41" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Nos différents <em>contrats</em></h2>
+    <div class="keylearning"><p>Un hôtel prêt à performer dès son ouverture.</p></div>
+    <p class="click-hint" data-chrome>Cliquez sur un contrat pour afficher son détail.</p>
+    <div class="contracts" id="contracts">
+      <div class="ct-cards" role="tablist" aria-label="Contrats">
+        <button class="ct-card on" role="tab" aria-selected="true" aria-controls="ct-p1" id="ct-t1" type="button">
+          <span class="ct-num" data-chrome>01</span><strong>Design &amp; Project Management (ATH)</strong><span class="ct-k">Notre rôle</span><span class="ct-role">Faire le lien entre vous, les architectes et les entreprises</span><span class="ct-more" data-chrome>Voir le détail →</span>
+        </button>
+        <button class="ct-card" role="tab" aria-selected="false" aria-controls="ct-p2" id="ct-t2" type="button">
+          <span class="ct-num" data-chrome>02</span><strong>Stratégie de pré-opening</strong><span class="ct-k">Notre rôle</span><span class="ct-role">Préparer l’hôtel pour qu’il performe dès son ouverture</span><span class="ct-more" data-chrome>Voir le détail →</span>
+        </button>
+        <button class="ct-card" role="tab" aria-selected="false" aria-controls="ct-p3" id="ct-t3" type="button">
+          <span class="ct-num" data-chrome>03</span><strong>Mandat de gestion d’actif</strong><span class="ct-k">Notre rôle</span><span class="ct-role">Gérer l’hôtel en votre nom, au quotidien. Le propriétaire nomme Oversight pour exécuter la gestion de l'actif, en tant que mandataire.</span><span class="ct-more" data-chrome>Voir le détail →</span>
+        </button>
+      </div>
+      <div class="ct-panels">
+        <div class="ct-panel on" role="tabpanel" id="ct-p1" aria-labelledby="ct-t1">
+          <h4 class="ct-print-title" data-chrome>Design &amp; Project Management (ATH)</h4>
+          <dl class="ct-dl">
+            <dt>Ce que nous faisons</dt><dd>Cette phase couvre l’accompagnement du Maître d’Ouvrage : revue opérationnelle des plans, définition du concept et des standards, accompagnement design, coordination avec l'architecte et les équipes de conception, suivi FF&amp;E, OS&amp;E et IT. De la signature jusqu'à l’ouverture. Cette mission vise à garantir la cohérence entre le positionnement hôtelier, les choix de conception, les investissements réalisés et les futurs standards d’exploitation de l’établissement.</dd>
+            <dt>Ce que vous y gagnez</dt><dd>Des investissements en cohérence avec le positionnement de l’hôtel</dd>
+            <dt>Durée</dt><dd>De la signature à l’ouverture</dd>
+            <dt>Conditions</dt><dd class="cond">5 % du montant des travaux (hors gros œuvre, montant basé sur les postes FF&amp;E / OS&amp;E / IT / design)</dd>
+          </dl>
+        </div>
+        <div class="ct-panel" role="tabpanel" id="ct-p2" aria-labelledby="ct-t2">
+          <h4 class="ct-print-title" data-chrome>Stratégie de pré-opening</h4>
+          <dl class="ct-dl">
+            <dt>Ce que nous faisons</dt><dd>Cette phase couvre l’ensemble des prestations nécessaires à la préparation opérationnelle de l’établissement et à son lancement, incluant notamment la définition de l’organisation, le recrutement et la formation des équipes, la mise en place des procédures, des outils et systèmes d’exploitation, la préparation des achats opérationnels, les tests opérationnels ainsi que la coordination des différentes parties prenantes jusqu’à l’ouverture. Le Business Plan, le positionnement de l’hôtel et la politique tarifaire sont préalablement validés par les parties prenantes afin de permettre le lancement des actions commerciales et la mise en exploitation de l’établissement.</dd>
+            <dt>Ce que vous y gagnez</dt><dd>Une ouverture maîtrisée, sans perte de temps</dd>
+            <dt>Durée</dt><dd>La durée de pré-ouverture s’étalera sur 4 à 6 mois.</dd>
+            <dt>Conditions</dt><dd class="cond">Forfait 100 000 € HT<br><br>Budget de pré-ouverture distinct, à la charge du Propriétaire, validé en amont.</dd>
+          </dl>
+        </div>
+        <div class="ct-panel" role="tabpanel" id="ct-p3" aria-labelledby="ct-t3">
+          <h4 class="ct-print-title" data-chrome>Mandat de gestion d’actif</h4>
+          <dl class="ct-dl">
+            <dt>Ce que nous faisons</dt><dd>Gestion courante de l'hôtel en tant que mandataire : mise en place du modèle de gestion, accompagnement des RH, du réglementaire, gestion commerciale, revenue management, distribution, achats, qualité, finance et reporting financier.</dd>
+            <dt>Ce que vous y gagnez</dt><dd>Une gestion pilotée par la donnée</dd>
+            <dt>Durée</dt><dd>4 ans à compter de l'ouverture, renouvelable tacitement par période de 2 ans.</dd>
+            <dt>Conditions</dt><dd class="cond">2 % du chiffre d'affaires total HT, avec un minimum annuel du montant des honoraires de 50 000 € HT.<br><br>8 % du GOP<br><br>En année stabilisée (2030) : ≈ 191 k€ HT/an, soit 6 % du CA total</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 37 · TROIS FORCES ===== -->
+<section id="s37" data-slide="37">
+  <div class="container">
+    <h2 class="section-title">Trois forces réunies <em>au service de votre hôtel</em></h2>
+    <div class="keylearning"><p>Des co-dirigeants sur le terrain qui décident, une structure qui leur donne les moyens d’agir : un modèle pensé pour sécuriser la performance de votre hôtel.</p></div>
+    <div class="grid-3">
+      <div class="model-card force"><strong>Une gouvernance de terrain</strong><p>3 Officers co-dirigeants, présents chaque jour à l’hôtel, responsables des décisions opérationnelles</p><span class="out">→ Des décisions prises sur place, au plus près des équipes</span></div>
+      <div class="model-card force"><strong>La data et la technologie</strong><p>MyOversight centralise et analyse toutes les données de l’hôtel</p><span class="out">→ Des décisions plus rapides et plus justes</span></div>
+      <div class="model-card force"><strong>Un accompagnement expert</strong><p>Un Business Analyst dédié et un pool de consultants</p><span class="out">→ Une gestion sécurisée</span></div>
+    </div>
+    <ul class="list-clean" style="margin-top:26px">
+      <li><strong>Une présence managériale 7 jours sur 7</strong>, au plus près des équipes et des clients</li>
+      <li><strong>Une exécution plus rapide et plus juste</strong>, grâce à des expertises complémentaires</li>
+      <li><strong>Une gouvernance solide</strong>, qui rassure les propriétaires et les partenaires financiers</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 38 · MYOVERSIGHT ===== -->
+<section id="s38" data-slide="38" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">MyOversight, <em>une vision complète de votre hôtel</em></h2>
+    <div class="keylearning"><p>Toutes les données de l’hôtel réunies dans un seul outil, pour décider au bon moment.</p></div>
+    <p>MyOversight est un outil de pilotage qui réunit et analyse en temps réel les données opérationnelles, commerciales, financières et réglementaires de l’hôtel. Cette granularité en temps réel permet aux propriétaires et co-dirigeants de disposer des bonnes informations, au bon moment, pour prendre des décisions plus rapides, pertinentes et créatrices de valeur. </p>
+    <div class="flow3">
+      <div class="flow-step"><strong>Vision complète et continue</strong><span>Toutes les données de l’hôtel, en temps réel</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><strong>Transparence</strong><span>Le propriétaire dispose de toutes les informations stratégiques</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><strong>Performance soutenue et risques limités</strong><span>Des décisions plus rapides et des risques détectés plus tôt</span></div>
+    </div>
+    <div class="table-wrap" style="margin-top:22px"><table>
+      <thead><tr><th>Ce que MyOversight suit</th><th>Ce qu’il permet</th></tr></thead>
+      <tbody>
+        <tr><td class="k wrap">Performance commerciale et finances</td><td class="wrap">Piloter le chiffre d’affaires et les résultats</td></tr>
+        <tr><td class="k wrap">Réputation et satisfaction client</td><td class="wrap">Agir vite sur l’expérience client</td></tr>
+        <tr><td class="k wrap">Opérations et conformité</td><td class="wrap">Anticiper les échéances réglementaires et les incidents</td></tr>
+      </tbody></table></div>
+    <div class="myov-demo" id="myovDemo" data-demo>
+      <button class="mvpause" id="myovPause" type="button" aria-pressed="false">Pause</button>
+      <div class="mvlap">
+      <div class="mvlap-screen">
+      <div class="mvw">
+        <div class="mvw-tabs"><span class="mvtab">MyOversight</span><span class="mvplus">+</span></div>
+        <div class="mvw-bar">
+          <span class="nv">&#8592;</span><span class="nv dim">&#8594;</span><span class="nv">&#10227;</span>
+          <span class="mvw-url"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.2 10.5V7.8a3.8 3.8 0 0 1 7.6 0v2.7"/></svg>app.myoversight.com/grand-hotel-de-paris</span>
+        </div>
+        <div class="mvw-body">
+          <aside class="mvw-rail">
+            <div class="rk">Pilotage</div>
+            <div class="rl" style="--i:0"><i></i>Alertes</div>
+            <div class="rl" style="--i:1"><i></i>Sales</div>
+            <div class="rl" style="--i:2"><i></i>Maintenance</div>
+            <div class="rl" style="--i:3"><i></i>E-r&eacute;putation</div>
+            <div class="rl" style="--i:4"><i></i>Vue propri&eacute;taire</div>
+          </aside>
+          <div class="mvw-main">
+
+            <section class="mvs" style="--i:0">
+              <div class="mvalert pop" style="--i:0;--o:.4s"><span class="ic">!</span><span><strong>Titre de s&eacute;jour &agrave; renouveler dans 14 jours</strong><span>J. M. &middot; r&eacute;ception &middot; document expirant le 05/10</span></span><span class="tag">R&eacute;glementaire</span></div>
+              <div class="mvalert pop" style="--i:0;--o:1.1s"><span class="ic">!</span><span><strong>Pick-up J-3 = 0</strong><span>Nuit du 14 nov. &middot; occupation 38 % &middot; aucun BAR concurrent &gt; 320 &euro;</span></span><span class="tag">Commercial</span></div>
+              <div class="mvalert pop" style="--i:0;--o:1.8s"><span class="ic">!</span><span><strong>Contrat de blanchisserie &agrave; &eacute;ch&eacute;ance dans 30 jours</strong><span>Reconduction tacite le 21/10 &middot; renouveler ou comparer trois prestataires</span></span><span class="tag">Contrats</span></div>
+              <div class="mvalert ok pop" style="--i:0;--o:2.5s"><span class="ic">&#10003;</span><span><strong>V&eacute;rification p&eacute;riodique ascenseur &mdash; conforme</strong><span>Rapport analys&eacute; automatiquement &middot; prochaine &eacute;ch&eacute;ance en mars</span></span><span class="tag">Conforme</span></div>
+            </section>
+
+            <section class="mvs" style="--i:1">
+              <div class="mvkpis">
+                <div class="mvkpi pop" style="--i:1;--o:.5s"><b>149 k&euro;</b><span>CA hebdomadaire</span><em>+6,2 % vs N-1</em></div>
+                <div class="mvkpi pop" style="--i:1;--o:1s"><b>238 &euro;</b><span>RevPAR</span><em>+7 % vs compset</em></div>
+                <div class="mvkpi pop" style="--i:1;--o:1.5s"><b>54,8 %</b><span>GOP</span><em>+1,4 pt vs budget</em></div>
+              </div>
+              <div class="mvchart">
+                <i style="--i:1;--o:.6s;--h:44%"></i><i style="--i:1;--o:.75s;--h:58%"></i><i style="--i:1;--o:.9s;--h:51%"></i>
+                <i style="--i:1;--o:1.05s;--h:69%"></i><i style="--i:1;--o:1.2s;--h:62%"></i><i style="--i:1;--o:1.35s;--h:78%"></i>
+                <i style="--i:1;--o:1.5s;--h:71%"></i><i style="--i:1;--o:1.65s;--h:88%"></i><i style="--i:1;--o:1.8s;--h:82%"></i>
+                <i class="last" style="--i:1;--o:1.95s;--h:97%"></i>
+              </div>
+            </section>
+
+            <section class="mvs" style="--i:2">
+              <h5>Ticket de maintenance</h5>
+              <div class="mvticket">
+                <div class="th"><strong>#2418 &middot; Climatisation chambre 214</strong><span class="mvchip" style="--i:2">Ouvert</span></div>
+                <ul class="mvsteps">
+                  <li style="--i:2;--o:.5s"><u>09:12</u><s></s>D&eacute;clar&eacute; par la gouvernante</li>
+                  <li style="--i:2;--o:1.4s"><u>09:14</u><s></s>Assign&eacute; au technicien &middot; chambre bloqu&eacute;e &agrave; la vente</li>
+                  <li class="done" style="--i:2;--o:2.3s"><u>10:38</u><s></s>R&eacute;solu &middot; chambre remise en vente</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="mvs" style="--i:3">
+              <div class="mvrep">
+                <div class="mvscore"><b>9</b><span>Note moyenne</span><span class="mvgauge"><i style="--i:3"></i></span></div>
+                <div>
+                  <div class="mvrev pop" style="--i:3;--o:.6s"><strong>Taux de captage 62 % &middot; temps de r&eacute;ponse 9 h</strong><span>Objectif r&eacute;seau : 55 % et moins de 24 h</span></div>
+                  <div class="mvrev pop" style="--i:3;--o:1.5s"><strong>3 avis mentionnent le bruit de l&rsquo;avenue</strong><span>Th&egrave;me remont&eacute; automatiquement &agrave; l&rsquo;analyse s&eacute;mantique</span></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="mvs" style="--i:4">
+              <h5>Vue propri&eacute;taire &mdash; temps r&eacute;el</h5><span class="mvsub">Le m&ecirc;me socle de donn&eacute;es, lu depuis votre acc&egrave;s</span>
+              <div class="mvown">
+                <div class="pop" style="--i:4;--o:.4s"><b>238 &euro;</b><span>RevPAR</span></div>
+                <div class="pop" style="--i:4;--o:.8s"><b>54,8 %</b><span>GOP</span></div>
+                <div class="pop" style="--i:4;--o:1.2s"><b>9</b><span>E-r&eacute;putation</span></div>
+                <div class="pop" style="--i:4;--o:1.6s"><b>0</b><span>Alerte ouverte</span></div>
+              </div>
+              <div class="mvflow pop" style="--i:4;--o:2.2s">
+                <em>PMS</em><em>POS</em><em>Paie</em><em>Compta</em><em>Avis clients</em><em>Maintenance</em>
+                <span class="ar">&rarr;</span><b>Datalake Oversight</b><span class="ar">&rarr;</span><b>Alertes &middot; Reporting &middot; D&eacute;cisions</b>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="mvlap-base"></div>
+      </div>
+      <span class="mvcur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 2.5 19.4 12.2l-6.1.9 3.3 6.6-2.7 1.3-3.3-6.6-4.6 4.1z"/></svg></span>
+      <div class="mvbubs">
+      <div class="mvbub" style="--i:0">Le datalake d&eacute;tecte, la plateforme alerte : <b>le risque est trait&eacute; avant qu&rsquo;il co&ucirc;te</b>.</div>
+      <div class="mvbub" style="--i:1">Les performances sont consolid&eacute;es chaque nuit : <b>plus d&rsquo;intuition, des d&eacute;cisions sur la donn&eacute;e</b>.</div>
+      <div class="mvbub" style="--i:2">Plaintes et tickets suivis de bout en bout : <b>la continuit&eacute; de service ne d&eacute;pend plus des personnes</b>.</div>
+      <div class="mvbub" style="--i:3">L&rsquo;e-r&eacute;putation est analys&eacute;e, pas seulement affich&eacute;e : <b>les irritants deviennent un plan d&rsquo;action</b>.</div>
+      <div class="mvbub" style="--i:4">Vous voyez la m&ecirc;me v&eacute;rit&eacute; que vos co-dirigeants, <b>au m&ecirc;me moment</b>.</div>
+      </div>
+    </div>
+    <div class="keylearning closing" style="margin-top:30px"><p><strong>Plus de visibilité. Moins d’incertitude. Plus de valeur.</strong></p></div>
+  </div>
+</section>
+
+<!-- ===== 39 · POOL D'EXPERTS ===== -->
+<section id="s39" data-slide="39">
+  <div class="container">
+    <h2 class="section-title">Un pool d’experts pour <em>sécuriser la performance</em></h2>
+    <div class="keylearning"><p>Un interlocuteur dédié, un pool d’experts mobilisable à 360° : vous gardez la décision, nous sécurisons l’exécution.</p></div>
+    <div class="grid-2 even">
+      <div class="card">
+        <h4 class="mini">Un interlocuteur unique : le Business Analyst dédié</h4>
+        <p>Véritable relais privilégié des propriétaires, il garantit le pilotage de l’hôtel au quotidien :</p>
+        <ul class="list-clean tight">
+          <li>Comités de pilotage stratégiques pour suivre la performance et définir les priorités</li>
+          <li>Reporting continu offrant une visibilité complète sur l’activité et les résultats</li>
+          <li>Analyses ponctuelles pour répondre à des enjeux spécifiques</li>
+          <li>Accompagnement proactif : alertes et recommandations pour éclairer la prise de décision</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="mini">Un pool d’experts mobilisable à 360°</h4>
+        <p>En support des trois Officers, nos consultants interviennent sur l’ensemble des fonctions clés (Ressources Humaines, Sales &amp; Revenue Management, Marketing, Organisation, Knowledge Management, R, Réglementaire) pour renforcer la satisfaction client, l’engagement des équipes et la performance de l’hôtel.</p>
+        <h4 class="sub">Des expertises mobilisées au quotidien</h4>
+        <ul class="list-clean tight">
+          <li>Formation et coaching des équipes dirigeantes</li>
+          <li>Accompagnement des projets stratégiques</li>
+          <li>Audits et diagnostics opérationnels</li>
+          <li>Suivi budgétaire et contrôle de gestion</li>
+          <li>Analyses ponctuelles et études spécifiques</li>
+          <li>Veille continue et alertes proactives</li>
+          <li>Recommandations et plans d’actions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 42 · SYNERGIES ===== -->
+<section id="s42" data-slide="42" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Les synergies apportées par le <em>modèle Oversight</em></h2>
+    <div class="keylearning"><p>Mutualiser pour performer : moins de coûts, moins de risques, plus de valeur.</p></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Ce que nous mutualisons</th><th>Ce que l’hôtel y gagne</th></tr></thead>
+      <tbody>
+        <tr><td class="wrap">Les expertises : RH, marketing, revenue management, réglementation…</td><td class="wrap">Une équipe complète aux multiples compétences, sans la masse salariale</td></tr>
+        <tr><td class="wrap">La technologie : MyOversight, le reporting, l’automatisation</td><td class="wrap">Un pilotage en temps réel, sans budget informatique</td></tr>
+        <tr><td class="wrap">La donnée : les analyses du marché</td><td class="wrap">De meilleures décisions, sans équipe Data à financer</td></tr>
+        <tr><td class="wrap">L’accompagnement en continu : les experts et le Business Analyst</td><td class="wrap">Un filet de sécurité permanent sur l’exploitation</td></tr>
+        <tr><td class="wrap">L’expérience du réseau : les bonnes pratiques de tous les hôtels accompagnés par Oversight</td><td class="wrap">Des méthodes déjà éprouvées</td></tr>
+      </tbody></table></div>
+    <div class="stats-row two" style="margin-top:24px">
+      <div class="stat-card"><div class="num" style="font-size:20px">Moins</div><div class="label">de coûts fixes et de risques. </div></div>
+      <div class="stat-card"><div class="num" style="font-size:20px">Plus</div><div class="label">de visibilité et de temps pour créer de la valeur.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 43 · ANNEXES ===== -->
+<section id="s43" data-slide="43" class="divider-section">
+  <div class="container">
+    <h2>Annexes</h2>
+  </div>
+</section>
+
+<!-- ===== 18 · ROOM-MIX (1/2) ===== -->
+<section id="s18" data-slide="18" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Le room-mix et la distribution des <em>chambres par étage (1/2)</em></h2>
+    <div class="keylearning"><p><strong><em>Hypothèses non fondées sur l’exploitation des deux commerces en RDC</em></strong></p><p>Le room-mix est bien rentabilisé : 50 clés en 6 catégories, et des étages types qui se répètent, ce qui standardise le produit. Mais il dépend de chambres compactes et d’espaces communs sous-dimensionnés. La valeur se jouera sur la valorisation du dernier étage, la flexibilité des chambres (modularité en lits jumeaux, chambres communicantes) et la capacité du petit-déjeuner.</p></div>
+    <div class="ffr">
+      <div class="ffr-col forces"><h4>Forces</h4><ul>
+        <li><strong>6 catégories commerciales :</strong> Single Mansarde, Single, Classique, Supérieure, Triple et Familiale, ce qui permet une vraie échelle de prix.</li>
+        <li><strong>9 chambres par étage du R+2 au R+5:</strong> empilées verticalement ce qui simplifie l’entretien et le standard produit.</li>
+        <li><strong>Salle d’eau privative des chambres :</strong> les douches sont généreuses (110 × 90, 120 × 90, 100 × 100), plus grandes que la norme de 80 × 80.</li>
+        <li><strong>2 chambres PMR (16 et 46) :</strong> c’est le minimum réglementaire pour 50 clés. Elles sont spacieuses (environ 19 et 21 m²) et proches de l’ascenseur.</li>
+        <li><strong>Accessibilité :</strong> un ascenseur dessert tous les niveaux, avec une bagagerie de 4,6 m² au RDC.</li>
+      </ul></div>
+      <div class="ffr-col faiblesses"><h4>Faiblesses</h4><ul>
+        <li><strong>26 % des chambres sont des singles, dont 6 sous combles de 9,8 à 12,3 m² :</strong> elles sont sous les seuils 4*. Elles risquent d’attirer des avis négatifs et limitent le prix moyen.</li>
+        <li><strong>Classiques compactes :</strong> la moyenne est de 15,7 m² et la plus petite fait 14,4 m² (chambres 24, 34, 51). Elles sont juste au niveau de la tolérance 4*.</li>
+        <li><strong>Espaces communs sous-dimensionnés :</strong> 53 m² au RDC pour un minimum de 70 m² (critère 14). Il n’y a ni bar ni salon, et aucun sanitaire commun H/F (critère 24).</li>
+        <li><strong>Salle petit-déjeuner de 24,9 m² pour 19 places :</strong> pour environ 94 clients à pleine occupation. Il y a un risque d’attente le matin.</li>
+        <li><strong>Un seul ascenseur et pas de monte-charge :</strong> les flux clients, entretien et bagages se croisent.</li>
+      </ul></div>
+      <div class="ffr-col reco"><h4>Recommandations</h4><ul>
+        <li><strong>Assumer le R+6 comme une catégorie « Single Mansarde » :</strong> prix d’entrée de gamme, surface affichée de façon transparente. </li>
+        <li><strong>Créer des WC communs H/F (dont un PMR) dans l’office du RDC (9,4 m²) :</strong> on récupère le critère 24, et les points optionnels à obtenir baissent de 9.</li>
+        <li><strong>Désengorger le petit-déjeuner :</strong> proposer un petit-déjeuner à emporter (critère 195) et le service en chambre, et élargir les horaires du buffet.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 19-22 · ROOM-MIX (2/2) ===== -->
+<section id="s19" data-slide="19">
+  <div class="container">
+    <h2 class="section-title">Le room-mix et la distribution des <em>chambres par étage (2/2)</em></h2>
+    <div class="keylearning"><p>Un cœur d’offre Classique et Supérieure représentant 62 % du parc, complété par des chambres individuelles et une Familiale pour diversifier les clientèles.</p></div>
+    <div class="grid-2 even">
+      <div class="card">
+        <h4 class="mini">Structure du room-mix</h4>
+        <p>Le projet compte 50 chambres réparties en six catégories, pour une surface moyenne de 15,87 m². Les 31 chambres Classiques et Supérieures constituent le socle de l’offre, complété par 13 chambres individuelles et 6 chambres pouvant accueillir trois ou quatre personnes.</p>
+        <h4 class="mini">Une offre adaptée à plusieurs profils de séjour</h4>
+        <p>Les chambres individuelles représentent 26 % du parc et permettent de cibler les voyageurs seuls. Les chambres Triples et Familiale, soit 12 % de l’inventaire, élargissent les possibilités d’accueil aux familles et petits groupes. Cette diversité permet d’adapter la commercialisation aux différents segments de demande.</p>
+      </div>
+      <div class="card">
+        <h4 class="mini">Une distribution régulière, avec un dernier étage spécifique</h4>
+        <p>Les niveaux R+2 à R+5 accueillent chacun neuf chambres, avec une dominante de Classiques et de Supérieures. Le R+6 se distingue par six chambres Single Mansarde sur huit : ce niveau appelle un traitement commercial spécifique, valorisant son caractère mansardé tout en tenant compte des surfaces et du confort d’usage.</p>
+        <h4 class="mini">Une hiérarchie tarifaire à appuyer sur les caractéristiques réelles</h4>
+        <p>Les surfaces moyennes progressent entre les catégories, mais leurs amplitudes se chevauchent, notamment entre Supérieures et Triples. Les écarts tarifaires devront donc refléter à la fois la surface, la capacité d’accueil et les prestations. L’unique chambre Familiale de 28,72 m² constitue une offre différenciante, dont la disponibilité limitée appelle une gestion tarifaire dédiée.</p>
+      </div>
+    </div>
+    <h3 class="blk" id="s20" style="margin-top:36px">Répartition des catégories par étage</h3>
+    <div class="grid-2 wide-left">
+      <div class="table-wrap"><table class="tbl-center compact">
+        <thead><tr><th>CATÉGORIE COMMERCIALE</th><th>R01</th><th>R02</th><th>R03</th><th>R04</th><th>R05</th><th>R06</th><th>TOTAL</th><th>% DU PARC</th></tr></thead>
+        <tbody>
+          <tr><td>Cat. 1 Single Mansarde</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>6</td><td>6</td><td>12,0 %</td></tr>
+          <tr><td>Cat. 2 Single</td><td>0</td><td>1</td><td>1</td><td>3</td><td>2</td><td>0</td><td>7</td><td>14,0 %</td></tr>
+          <tr><td>Cat. 3 Classique</td><td>2</td><td>5</td><td>5</td><td>3</td><td>5</td><td>1</td><td>21</td><td>42,0 %</td></tr>
+          <tr><td>Cat. 4 Supérieure</td><td>2</td><td>2</td><td>2</td><td>3</td><td>1</td><td>0</td><td>10</td><td>20,0 %</td></tr>
+          <tr><td>Cat. 5 Triple</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>5</td><td>10,0 %</td></tr>
+          <tr><td>Cat. 6 Familiale (quadruple)</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2,0 %</td></tr>
+          <tr class="sumrow boldrow"><td>Total</td><td>6</td><td>9</td><td>9</td><td>9</td><td>9</td><td>8</td><td>50</td><td>100,0 %</td></tr>
+        </tbody></table></div>
+      <div class="chart-box" id="s22"><div class="chart-canvas-wrap"><canvas id="ch22" aria-label="Répartition des catégories par étage"></canvas></div></div>
+    </div>
+    <h3 class="blk" id="s21" style="margin-top:36px">Surfaces par catégorie commerciale</h3>
+    <div class="table-wrap"><table class="tbl-center compact">
+      <thead><tr><th>CATÉGORIE COMMERCIALE</th><th>NB CHAMBRES</th><th>% DU PARC</th><th>SURFACE MIN (M²)</th><th>SURFACE MAX (M²)</th><th>SURFACE MOY. (M²)</th><th>N° DE CHAMBRES</th></tr></thead>
+      <tbody>
+        <tr><td>Single Mansarde</td><td>6</td><td>12,0 %</td><td>9,80</td><td>12,29</td><td>10,79</td><td class="wrap">61, 62, 63, 65, 66, 67</td></tr>
+        <tr><td>Single</td><td>7</td><td>14,0 %</td><td>12,38</td><td>14,95</td><td>13,52</td><td class="wrap">23, 33, 41, 43, 44, 53, 54</td></tr>
+        <tr><td>Classique</td><td>21</td><td>42,0 %</td><td>14,44</td><td>16,67</td><td>15,65</td><td class="wrap">17, 18, 20, 21, 24, 27, 28, 30, 31, 34, 37, 38, 40, 47, 48, 50, 51, 52, 57, 58, 68</td></tr>
+        <tr><td>Supérieure</td><td>10</td><td>20,0 %</td><td>16,77</td><td>20,76</td><td>17,64</td><td class="wrap">15, 16, 22, 25, 32, 35, 42, 45, 46, 55</td></tr>
+        <tr><td>Triple</td><td>5</td><td>10,0 %</td><td>17,06</td><td>21,88</td><td>20,09</td><td class="wrap">10, 26, 36, 56, 60</td></tr>
+        <tr><td>Familiale (quadruple)</td><td>1</td><td>2,0 %</td><td>28,72</td><td>28,72</td><td>28,72</td><td class="wrap">14</td></tr>
+        <tr class="sumrow boldrow"><td>Total</td><td>50</td><td>100,0 %</td><td>9,80</td><td>28,72</td><td>15,87</td><td></td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<!-- ===== 29-30 · POSITIONNEMENT DE L'OFFRE ===== -->
+<section id="s29" data-slide="29" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title">Positionnement de l’offre de chambre <em>face au Compset</em></h2>
+    <div class="keylearning"><p>Une offre entrée et cœur de gamme compacte, créant des leviers de volume. </p></div>
+    <h4 class="sub">Caractéristiques des comparables </h4>
+    <div class="table-wrap"><table class="mid compact">
+      <thead><tr><th></th><th>PROJET GRAND HOTEL DE PARIS 4*</th><th>MOYENNE COMPARABLES</th><th>HOTEL FLANELLES 4*</th><th>9HOTEL REPUBLIQUE 4*</th><th>HOTEL MADEMOISELLE Paris 4*</th><th>LITTERAIRE ARTHUR RIMBAUD 4*</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Nombre de chambres</td><td class="hl">50</td><td>47</td><td>44</td><td>48</td><td>53</td><td>42</td></tr>
+        <tr><td class="k">Classification (étoiles)</td><td class="hl">4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
+        <tr><td class="k">Surface moy pondérée (m²)</td><td class="hl">15,9</td><td>15,1</td><td>12,4</td><td>16,3</td><td>17,1</td><td>14,3</td></tr>
+      </tbody></table></div>
+    <div id="s30" style="margin-top:34px">
+      <div class="keylearning"><p>Une offre moins concentrée sur les petites surfaces que trois des quatre concurrents, dont la valorisation reposera aussi sur l’expérience client et le rapport qualité-prix.</p></div>
+      <div class="grid-2 wide-right">
+        <div class="card">
+          <h4 class="mini">Points clés</h4>
+          <p>Le Projet Grand Hôtel de Paris présente une capacité de surface moyenne en ligne avec le panel sélectionné (15m<strong>²</strong>).</p>
+          <ul class="list-clean tight">
+            <li><strong>74 % des chambres ≥ moyenne de 15 m²</strong> : un avantage face à trois des quatre concurrents.</li>
+            <li><strong>Un cœur d’offre concentré sur les chambres de superficie moyenne de 15 à 18,9 m²</strong> (62 % du parc), avec une moindre proportion de chambres de moins de 15 m² que trois des quatre concurrents.</li>
+            <li><strong>Un haut de gamme limité en surface :</strong> seulement 2 % de grandes chambres ≥ 22 m² et 12 % de petites chambres &lt; moyenne de 13 m². </li>
+            <li><strong>Un enjeu de valorisation :</strong> soigner l’aménagement et l’expérience client pour soutenir les écarts tarifaires et se différencier des concurrents les plus spacieux.</li>
+          </ul>
+          <p style="margin-top:10px">La valeur devra davantage reposer sur l’expérience et le rapport qualité-prix.</p>
+        </div>
+        <div class="chart-box"><h4>Répartition des chambres par catégorie de surface </h4><div class="chart-canvas-wrap tall"><canvas id="ch30" aria-label="Répartition des chambres par catégorie de surface"></canvas></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 44 · ORGANIGRAMME ===== -->
+<section id="s44" data-slide="44">
+  <div class="container">
+    <h2 class="section-title"><em>Organigramme</em></h2>
+    <div class="keylearning"><p>Une direction horizontale et partagée permettant une présence managériale 7j/7 et une polyvalence opérationnelle capable d'optimiser la masse salariale.</p></div>
+    <div class="org">
+      <div class="org-top">
+        <div class="org-box lead">Chief Operating Officer  (Direction générale et Réception)</div>
+        <div class="org-box lead">Chief Marketing Officer  (Direction générale et Réception)</div>
+        <div class="org-box lead">Chief Sales Officer <br>(Direction générale et Réception)</div>
+      </div>
+      <div class="org-cols">
+        <div class="org-col"><div class="org-box">Gouvernante</div><div class="org-box">Femme de chambre X 7</div><div class="org-box">Équipier </div></div>
+        <div class="org-col"><div class="org-box">Réceptionniste polyvalent X2</div><div class="org-box">Réceptionniste de nuit X2</div></div>
+        <div class="org-col"><div class="org-box">Responsable petit-déjeuner</div><div class="org-box">Serveur petit-déjeuner X2</div></div>
+        <div class="org-col"><div class="org-box">Technicien polyvalent</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:26px">
+      <p><strong>Housekeeping : 9 collaborateurs (1 gouvernante, 7 femmes de chambre, 1 équipier)</strong></p>
+      <p><strong>Productivité : </strong>12 ch./FDC/jour (7,8 h de travail/j/FDC, hors pause, briefing, chariot, couloirs)</p>
+      <h4 class="mini" style="margin-top:14px">Autres postes</h4>
+      <p>Direction, réception, petit‑déjeuner et maintenance sont dimensionnés sur un hôtel comparable accompagné par Oversight, de même catégorie et de capacité équivalente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 45 · GLOSSAIRE ===== -->
+<section id="s45" data-slide="45" class="bg-alt">
+  <div class="container">
+    <h2 class="section-title"><em>Glossaire</em></h2>
+    <div class="grid-2 even">
+      <div><ul class="list-clean">
+        <li><strong>ADR / PM</strong> · <em>Average Daily Rate / Prix Moyen</em> — prix moyen réellement vendu. Il ne tient pas compte des chambres vides (à la différence du RevPAR). Formule : CA hébergement ÷ chambres vendues.</li>
+        <li><strong>ARI</strong> · <em>Average Rate Index</em> — indice de prix. Au-dessus de 100, l’établissement vend plus cher que le marché. Formule : (ADR hôtel ÷ ADR compset) × 100</li>
+        <li><strong>ATH : </strong><em>Assistance Technique Hôtelière </em>— accompagnement du maître d’ouvrage par un spécialiste de l’exploitation pendant la conception et les travaux. </li>
+        <li><strong>BAR</strong> · <em>Best Available Rate</em> — meilleur tarif public disponible du jour.</li>
+        <li><strong>BoH</strong> · <em>Back of House</em> — tous les espaces d’un hôtel réservés au personnel.</li>
+        <li><strong>Compset</strong> · <em>Competitive Set</em> — panel d’hôtels concurrents de référence pour se comparer (prix, occupation, RevPAR).</li>
+        <li><strong>Données normalisées</strong> — performance projetée sur une année passée sur une base comparable au marché, non des données réelles observées.</li>
+        <li><strong>FF&amp;E </strong>· <em>Furniture, Fixtures &amp; Equipment </em>— mobilier, agencements et équipements durables de l’hôtel.</li>
+      </ul></div>
+      <div><ul class="list-clean">
+        <li><strong>GOP</strong> · <em>Gross Operating Profit </em>— résultat brut d’exploitation hôtelier, avant honoraires de gestion, loyers, assurances, taxes et amortissements. Formule : CA total − charges d’exploitation.</li>
+        <li><strong>MPI</strong> · <em>Market Penetration Index</em> — indice d’occupation. Au-dessus de 100, l’établissement remplit mieux que le marché. Formule : (TO hôtel ÷ TO compset) × 100</li>
+        <li><strong>OS&amp;E </strong>· <em>Operating Supplies &amp; Equipment </em>— petits équipements et fournitures nécessaires à l’exploitation : linge, vaisselle, verrerie, produits d’accueil, chariots, petit matériel. Ils sont renouvelés régulièrement.</li>
+        <li><strong>RevPAR</strong> · <em>Revenue Per Available Room</em> — revenu hébergement par chambre disponible. Formule : CA hébergement ÷ chambres disponibles = ADR × taux d’occupation</li>
+        <li><strong>RGI</strong> · <em>Revenue Generation Index</em> — indice de RevPAR. Formule : (RevPAR hôtel ÷ RevPAR compset) × 100 = (MPI × ARI) ÷ 100</li>
+        <li><strong>SS1</strong> · <em>Sous-sol 1 </em>— premier niveau de sous-sol du bâtiment. </li>
+        <li><strong>TO</strong> · <em>Taux d’occupation </em>— part des chambres effectivement vendues sur une période. Formule : chambres vendues ÷ chambres disponibles</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+
+<footer data-chrome>
+  <div class="container">
+    <span>Grand Hôtel de Paris &middot; 72 boulevard de Strasbourg, 75010 Paris</span>
+    <span>Oversight</span>
+  </div>
+</footer>
+
+<button id="backTop" aria-label="Remonter en haut de la page" title="Remonter en haut" data-chrome>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ===== navigation : menu, bandeau de section, lien actif ===== */
+const navToggle=document.getElementById('navToggle');
+const navMenu=document.getElementById('navMenu');
+navToggle.addEventListener('click',()=>{
+  const open=navMenu.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded',open?'true':'false');
+});
+navMenu.addEventListener('click',e=>{if(e.target.closest('a')){navMenu.classList.remove('open');navToggle.setAttribute('aria-expanded','false');}});
+document.addEventListener('click',e=>{if(!e.target.closest('header'))navMenu.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')navMenu.classList.remove('open');});
+
+const sections=[...document.querySelectorAll('section[data-slide], div.ghc[data-slide]')];
+const sticky=document.getElementById('stickyTheme');
+const stickyLabel=document.getElementById('stickyLabel');
+const links=[...navMenu.querySelectorAll('a')];
+let part=null;const partOf=new Map();
+sections.forEach(s=>{if(s.classList.contains('divider-section'))part=s.id;partOf.set(s,part);});
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting)return;
+    const sec=en.target;
+    const isHero=sec.classList.contains('hero');
+    sticky.classList.toggle('visible',!isHero);
+    const t=sec.dataset.label||(sec.querySelector('.section-title,h2')||{}).textContent;
+    if(t&&!isHero)stickyLabel.textContent=t.trim();
+    const p=partOf.get(sec);
+    links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+p));
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+sections.forEach(s=>io.observe(s));
+
+/* ===== graphiques (valeurs reprises du PPT) ===== */
+if(window.Chart){
+  Chart.defaults.font.family="'Inter',sans-serif";
+  Chart.defaults.font.size=11;
+  Chart.defaults.color='#5A6076';
+  Chart.defaults.animation=false;
+  Chart.defaults.plugins.legend.labels.usePointStyle=true;
+  Chart.defaults.plugins.legend.labels.boxWidth=8;
+  Chart.defaults.plugins.legend.labels.padding=12;
+  const PALETTE=['#496BFF','#00011E','#7C9182','#8FA6FF','#C9D3C9','#B99A55'];
+  const GRID={color:'rgba(0,1,30,.06)'};
+  const pct=v=>Math.round(v*100)+' %';
+  const pct1=v=>(Math.round(v*1000)/10).toString().replace('.',',')+' %';
+  const CH22={"cats": ["R01", "R02", "R03", "R04", "R05", "R06"], "series": [{"name": "Single Mansarde", "values": [0.0, 0.0, 0.0, 0.0, 0.0, 6.0]}, {"name": "Single", "values": [0.0, 1.0, 1.0, 3.0, 2.0, 0.0]}, {"name": "Classique", "values": [2.0, 5.0, 5.0, 3.0, 5.0, 1.0]}, {"name": "Supérieure", "values": [2.0, 2.0, 2.0, 3.0, 1.0, 0.0]}, {"name": "Triple", "values": [1.0, 1.0, 1.0, 0.0, 1.0, 1.0]}, {"name": "Familiale (quadruple)", "values": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0]}]};
+  const CH28={"cats": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"], "series": [{"name": "TO % Projet ", "values": [0.7884, 0.8007120000000001, 0.87804, 0.9124920000000001, 0.9091440000000002, 0.9846340000000001, 0.949428, 0.8899200000000002, 0.9400320000000001, 0.9792360000000001, 0.9025559999999999, 0.8230679999999999]}, {"name": "TO Compset MKG", "values": [0.73, 0.7414000000000001, 0.813, 0.8449, 0.8418000000000001, 0.9289000000000001, 0.8791, 0.8240000000000001, 0.8704000000000001, 0.9067000000000001, 0.8356999999999999, 0.7620999999999999]}]};
+  const CH30={"cats": ["Projet Grand Hotel de Paris 4*", "Hôtel Flanelles 4*", "9Hotel République 4*", "Hôtel Mademoiselle Paris 4*", "Littéraire Arthur Rimbaud 4*"], "series": [{"name": "Cat. 1 · < 13 m²", "values": [0.12, 0.5909090909090909, 0.08333333333333333, 0.0, 0.0]}, {"name": "Cat. 2 · 13–14,9 m²", "values": [0.14, 0.1590909090909091, 0.3333333333333333, 0.0, 0.8095238095238095]}, {"name": "Cat. 3 · 15–16,9 m²", "values": [0.42, 0.09090909090909091, 0.2708333333333333, 0.32075471698113206, 0.07142857142857142]}, {"name": "Cat. 4 · 17–18,9 m²", "values": [0.2, 0.1590909090909091, 0.1875, 0.5471698113207547, 0.0]}, {"name": "Cat. 5 · 19–21,9 m²", "values": [0.1, 0.0, 0.0, 0.0, 0.09523809523809523]}, {"name": "Cat. 6 · ≥ 22 m²", "values": [0.02, 0.0, 0.125, 0.1320754716981132, 0.023809523809523808]}]};
+  const CH28L=[{"name": "PM € TTC Projet", "values": [156.731, 149.1215, 176.662, 198.23649999999998, 213.43649999999997, 246.981, 175.7405, 145.56849999999997, 214.453, 203.88899999999998, 172.72899999999998, 175.2655]}, {"name": "PM € TTC Compset MKG", "values": [164.98, 156.97, 185.96, 208.67, 224.67, 259.98, 184.99, 153.23, 225.74, 214.62, 181.82, 184.49]}, {"name": "PM annuel € TTC Projet", "values": [187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978, 187.247104400978]}, {"name": "PM annuel € TTC Compset MKG", "values": [197.21, 197.21, 197.21, 197.21, 197.21, 197.21, 197.21, 197.21, 197.21, 197.21, 197.21, 197.21]}];
+  
+  new Chart(document.getElementById('ch22'),{type:'bar',
+    data:{labels:CH22.cats,datasets:CH22.series.map((s,i)=>({label:s.name,data:s.values,backgroundColor:PALETTE[i]}))},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},
+      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:GRID,ticks:{precision:0}}}}});
+  const eur=v=>Math.round(v)+' €';
+  const LSTYLE=[{c:'#00011E',d:[]},{c:'#496BFF',d:[]},{c:'#00011E',d:[7,4]},{c:'#AEB9D8',d:[7,4]}];
+  const pmLabels={id:'pmLabels',afterDatasetsDraw(c){const g=c.ctx;c.data.datasets.forEach((d,i)=>{if(!/PM annuel/.test(d.label))return;const m=c.getDatasetMeta(i);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;g.save();g.font="600 11px Inter,sans-serif";const t=Math.round(d.data[0])+' €';const w=g.measureText(t).width;const x=p.x-w-6,y=p.y+(d.label.includes('Compset')?-7:15);g.fillStyle='rgba(255,255,255,.92)';g.fillRect(x-3,y-11,w+6,15);g.fillStyle=d.borderColor==='#AEB9D8'?'#5A6B9A':d.borderColor;g.fillText(t,x,y);g.restore();});}};
+  const ch28=new Chart(document.getElementById('ch28'),{plugins:[pmLabels],
+    data:{labels:CH28.cats,datasets:[
+      ...CH28.series.map((s,i)=>({type:'bar',label:s.name.trim(),data:s.values,backgroundColor:i?'#8FA6FF':'#00011E',borderRadius:2,yAxisID:'y1',order:2,pointStyle:'rect'})),
+      ...CH28L.map((s,i)=>({type:'line',label:s.name,data:s.values,borderColor:LSTYLE[i].c,backgroundColor:LSTYLE[i].c,borderDash:LSTYLE[i].d,backgroundColor:'rgba(0,0,0,0)',borderWidth:2,pointRadius:0,pointStyle:'line',tension:.25,fill:false,yAxisID:'y',order:1}))]},
+    options:{responsive:true,maintainAspectRatio:false,
+      layout:{padding:{right:6}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>x.dataset.label+' : '+(x.dataset.yAxisID==='y1'?pct1(x.raw):eur(x.raw))}}},
+      scales:{y:{position:'left',min:0,max:400,grid:GRID,ticks:{stepSize:100,callback:eur}},y1:{position:'right',min:0.7,max:1,grid:{display:false},ticks:{stepSize:0.05,callback:pct}},x:{grid:{display:false}}}}});
+  (function(){const box=document.getElementById('ch28-legend');if(!box)return;
+    ch28.data.datasets.forEach((d,i)=>{const it=document.createElement('button');it.type='button';it.className='lg-item';
+      const sw=d.type==='bar'?'<span class="lg-sq" style="background:'+d.backgroundColor+'"></span>'
+        :'<svg class="lg-ln" viewBox="0 0 30 6" aria-hidden="true"><line x1="0" y1="3" x2="30" y2="3" stroke="'+d.borderColor+'" stroke-width="2.4"'+(d.borderDash&&d.borderDash.length?' stroke-dasharray="5 3"':'')+'/></svg>';
+      it.innerHTML=sw+'<span></span>';it.lastChild.textContent=d.label;
+      it.onclick=()=>{const v=ch28.isDatasetVisible(i);ch28.setDatasetVisibility(i,!v);it.classList.toggle('off',v);ch28.update();};
+      box.appendChild(it);});})();
+  new Chart(document.getElementById('ch30'),{type:'bar',
+    data:{labels:CH30.cats,datasets:CH30.series.map((s,i)=>({label:s.name,data:s.values,backgroundColor:PALETTE[i]}))},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:x=>x.dataset.label+' : '+pct1(x.raw)}}},
+      scales:{x:{stacked:true,max:1,grid:GRID,ticks:{callback:pct}},y:{stacked:true,grid:{display:false},ticks:{font:{size:10},autoSkip:false}}}}});
+}
+window.__chartsReady=true;
+
+/* ===== slide 15 : galerie ===== */
+(function(){
+  const g=document.getElementById('cardinalGallery');if(!g)return;
+  const track=g.querySelector('.gallery-track'),slides=[...g.querySelectorAll('.gslide')];
+  const dots=g.querySelector('.gdots'),thumbs=g.querySelector('.gthumbs');let i=0,timer=null;
+  slides.forEach((s,k)=>{
+    const d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Photo '+(k+1));d.onclick=()=>go(k,true);dots.appendChild(d);
+    const t=document.createElement('button');t.type='button';t.setAttribute('aria-label','Photo '+(k+1));
+    const im=document.createElement('img');im.src=s.querySelector('img').src;im.alt='';t.appendChild(im);t.onclick=()=>go(k,true);thumbs.appendChild(t);
+  });
+  function go(k,user){i=(k+slides.length)%slides.length;track.style.transform='translateX('+(-100*i)+'%)';
+    [...dots.children].forEach((d,n)=>d.classList.toggle('on',n===i));[...thumbs.children].forEach((d,n)=>d.classList.toggle('on',n===i));
+    if(user)restart();}
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(i+1),5000);}
+  g.querySelector('.prev').onclick=()=>go(i-1,true);g.querySelector('.next').onclick=()=>go(i+1,true);
+  let x0=null;track.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  track.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1),true);x0=null;});
+  g.addEventListener('mouseenter',()=>clearInterval(timer));g.addEventListener('mouseleave',restart);
+  go(0);restart();
+})();
+
+/* ===== onglets : frise (slide 40) et contrats (slide 41) ===== */
+function tabs(root,btnSel,panelSel){
+  const r=document.getElementById(root);if(!r)return;
+  const btns=[...r.querySelectorAll(btnSel)],panels=[...r.querySelectorAll(panelSel)];
+  btns.forEach((b,k)=>b.addEventListener('click',()=>{
+    btns.forEach((x,n)=>{x.classList.toggle('on',n===k);x.setAttribute('aria-selected',n===k?'true':'false');});
+    panels.forEach((p,n)=>p.classList.toggle('on',n===k));
+  }));
+}
+tabs('timeline','.tl-step','.tl-panel');
+tabs('contracts','.ct-card','.ct-panel');
+
+/* ===== zoom image ===== */
+(function(){
+  function markable(img){return !img.closest('header')&&!img.closest('nav')&&!img.closest('.gthumbs')&&!img.closest('.rate-table')&&!img.closest('.maplabel')&&!img.closest('.loc-lines')&&!img.closest('.icon-card')&&!img.closest('.imgzoom-overlay');}
+  document.querySelectorAll('section img, .ghc img').forEach(img=>{if(markable(img)&&!img.closest('.overlay-map'))img.classList.add('imgzoomable');});
+  function close(){const o=document.querySelector('.imgzoom-overlay');if(o)o.remove();}
+  document.querySelectorAll('.overlay-map').forEach(m=>m.classList.add('imgzoomable'));
+  document.addEventListener('click',e=>{
+    const t=e.target;
+    if(t.closest&&t.closest('.imgzoom-overlay')){close();return;}
+    const map=t.closest&&t.closest('.overlay-map');
+    if(map){
+      close();const ov=document.createElement('div');ov.className='imgzoom-overlay';
+      const img=map.querySelector(':scope>img');const r=img.naturalWidth/img.naturalHeight||1.5;
+      const w=Math.min(window.innerWidth*0.94,window.innerHeight*0.9*r);
+      const clone=map.cloneNode(true);clone.classList.add('zoomed');clone.classList.remove('imgzoomable');clone.removeAttribute('style');clone.style.width=w+'px';
+      const hint=document.createElement('div');hint.className='imgzoom-hint';hint.textContent='Cliquer ou Échap pour fermer';
+      ov.appendChild(clone);ov.appendChild(hint);document.body.appendChild(ov);return;
+    }
+    if(t.tagName==='IMG'&&t.classList.contains('imgzoomable')){
+      close();const ov=document.createElement('div');ov.className='imgzoom-overlay';
+      const big=document.createElement('img');big.src=t.currentSrc||t.src;big.alt=t.alt||'';
+      const hint=document.createElement('div');hint.className='imgzoom-hint';hint.textContent='Cliquer ou Échap pour fermer';
+      ov.appendChild(big);ov.appendChild(hint);document.body.appendChild(ov);
+    }
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+
+/* ===== flèche de retour en haut ===== */
+(function(){
+  const btn=document.getElementById('backTop');
+  function toggle(){btn.classList.toggle('show',window.scrollY>500);}
+  window.addEventListener('scroll',toggle,{passive:true});
+  btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  toggle();
+})();
+
+</script>
+<script>
+
+/* demonstration MyOversight : boucle continue, pause au clic */
+(function(){
+  var d=document.getElementById('myovDemo'); if(!d) return;
+  var b=document.getElementById('myovPause');
+  function toggle(){
+    var p=d.classList.toggle('paused');
+    if(b){ b.textContent=p?'Reprendre':'Pause'; b.setAttribute('aria-pressed',p?'true':'false'); }
+  }
+  d.addEventListener('click',function(e){ if(e.target.closest('#myovPause')) return; toggle(); });
+  if(b) b.addEventListener('click',function(e){ e.stopPropagation(); toggle(); });
+})();
+
+</script>
+</body>
+</html>
